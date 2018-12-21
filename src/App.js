@@ -5,11 +5,9 @@ import { Container } from "reactstrap";
 
 class App extends Component {
   render() {
-    let m1 = new List([new List([1, 2, 3]), new List([4, 5, 6])])
     return (
       <Container>
-        <Matrix props={{foo: "asdf"}}/>
-        <Matrix/>
+        <Matrix data={{numericValues: List([1, 2, 3, 4]), shape: List([2, 2])}}/>
       </Container>
     );
   }
