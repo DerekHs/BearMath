@@ -1,4 +1,4 @@
-import './index.css';
+import 'bulma/css/bulma.css'
 import React from 'react';
 import App from './components/App';
 import { render } from 'react-dom'

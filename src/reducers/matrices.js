@@ -1,11 +1,15 @@
 import { CREATE_MATRIX } from "../actions/actions";
-import { OrderedMap, Map } from "immutable"
+import { OrderedMap, Map, List } from "immutable"
 
-const matrices = (state = new OrderedMap({"key": "value"}), action) => {
+const initialState = new OrderedMap({"example_matrix": new Map(
+  {shape: new List([2,2]), numericValues: new List([1, 0, 0, 1])}
+)})
+
+const matrices = (state = initialState, action) => {
     switch (action.type) {
       case CREATE_MATRIX:
         console.log("create matrix")
-        return state.set(action.name, new Map({shape: action.shape, numeric_values: action.numeric_values}))
+        return state.set(action.name, new Map({shape: action.shape, numericValues: action.numericValues}))
       default:
         return state
     }
