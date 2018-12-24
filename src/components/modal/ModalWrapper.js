@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-class CreateEditModal extends React.Component {
+class ModalWrapper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,4 +71,4 @@ Modal.propTypes = {
   title: PropTypes.string
 }
 
-export default CreateEditModal;
+export default ModalWrapper;
