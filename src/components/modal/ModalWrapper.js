@@ -22,17 +22,15 @@ class ModalWrapper extends React.Component {
     return(
         <div className="container">
           <div className="has-text-centered content">
-            <button className="button is-primary" onClick={this.toggleModal}>
-              Open Modal
-            </button>
+            {React.cloneElement(this.props.children[0], {onClick: this.toggleModal})}
           </div>
           
           <Modal 
             closeModal={this.toggleModal} 
             modalState={this.state.modalState} 
-            title="Example modal title"
+            title={this.props.children[1]}
           >
-            <p>hello</p>
+            {React.cloneElement(this.props.children[2], {toggle: this.toggleModal})}
           </Modal>
         </div>
     );
@@ -58,7 +56,6 @@ const Modal = ({ children, closeModal, modalState, title }) => {
           </div>
         </section>
         <footer className="modal-card-foot">
-          <button className="button" onClick={closeModal}>Cancel</button>
         </footer>
       </div>
     </div>

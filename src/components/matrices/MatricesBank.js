@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux'
 import { connect } from "react-redux"
 
 import Matrix from './Matrix';
-import { createMatrix } from "../../actions/matrices"
+
 
 class MatricesBank extends Component {
-  componentDidMount() {
-    this.props.createMatrix("foo", [1,3], [1, 2, 3])
-    this.props.createMatrix("bar", [3,1], [4, 5, 6])
-  }
 
   render() {
     return (
@@ -34,10 +29,4 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    createMatrix
-  }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MatricesBank);
+export default connect(mapStateToProps)(MatricesBank);

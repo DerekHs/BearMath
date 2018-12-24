@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import MatricesBank from "./matrices/MatricesBank"
-import InputGrid from "./modal/InputGrid"
+import CreateMatrix from "./modal/CreateMatrix"
 
 class App extends Component {
 
@@ -10,7 +10,7 @@ class App extends Component {
       <div>
         <div className="box">
           <div className="container">
-            <InputGrid initialRows={5} initialCols={6} />
+            <CreateMatrix/>
           </div>
         </div>
         <div className="box">

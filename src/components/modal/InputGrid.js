@@ -1,4 +1,8 @@
 import React from 'react';
+import { bindActionCreators } from 'redux'
+import { connect } from "react-redux"
+import { createMatrix } from "../../actions/matrices"
+import { List } from 'immutable';
 
 class InputGrid extends React.Component {
     constructor(props) {
@@ -8,6 +12,7 @@ class InputGrid extends React.Component {
         this.addCol = this.addCol.bind(this)
         this.removeRow = this.removeRow.bind(this)
         this.removeCol = this.removeCol.bind(this)
+        this.createMatrix = this.createMatrix.bind(this)
     }
 
     addRow() {
@@ -33,44 +38,59 @@ class InputGrid extends React.Component {
             numCols: Math.max(prevState.numCols - 1, 1)
         }))
     }
+    
+    createMatrix() {
+        let numericValues = new List()
+        for (let r = 0; r < this.state.numRows; r++) {
+            for (let c = 0; c < this.state.numCols; c++) {
+                numericValues = numericValues.push(this[`textInput${r},${c}`].value)
+            }
+        }
+        console.log(numericValues)
+        this.props.createMatrix(Math.random(), new List([this.state.numRows, this.state.numCols]), numericValues)
+        this.props.toggle()
+    }
 
     render() {
         return (
             <div className="container">
                 <div className="level">
                     <div>
-                        {[...Array(this.state.numRows).keys()]
-                            .map(i => <RowOfInputs key={i} length={this.state.numCols}/>)}
+                        {[...Array(this.state.numRows).keys()].map(i =>  
+                            <div key={i}>
+                                {[...Array(this.state.numCols).keys()].map(j =>
+                                    <input 
+                                        type="text" 
+                                        size="5" 
+                                        style={{fontSize: "15px"}} 
+                                        defaultValue="0"
+                                        key={`${i},${j}`}
+                                        ref={input => { this[`textInput${i},${j}`] = input }} />
+                                )}
+                                <br/>
+                            </div>)}
                     </div>
                     <div className="column">
-                        <button className="button" onClick={this.removeRow}>Remove Row</button>
+                        <button className="button is-small" onClick={this.removeRow}>Remove Row</button>
                         <br/>
-                        <br/>
-                        <button className="button" onClick={this.addRow}>Add Row</button>
+                        <button className="button is-small" onClick={this.addRow}>Add Row</button>
                     </div>
                 </div>
+                <span className="button is-small" onClick={this.removeCol}>Remove Col</span>
+                <span className="button is-small" onClick={this.addCol}>Add Col</span>
                 <br/>
-                <div className="buttons">
-                    <span className="button" onClick={this.removeCol}>Remove Col</span>
-                    <span className="button" onClick={this.addCol}>Add Col</span>
-                </div>
+                <button onClick={this.createMatrix}>Create Matrix</button>
             </div>
       )
   }
 }
-
-function SmallBox(props) {
-    return (
-        <input type="text" size="5" placeholder="0"/>
-    )
+  
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        createMatrix
+    }, 
+    dispatch)
 }
+  
+export default connect(null, mapDispatchToProps)(InputGrid);
 
-function RowOfInputs(props) {
-    return (
-        <div>
-            {[...Array(props.length).keys()].map(i => <SmallBox key={i}/>)}
-            <br/>
-        </div>)
-}
-
-export default InputGrid;
