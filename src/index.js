@@ -27,13 +27,13 @@ const logger = createLogger({
 });
 
 const store = createStore(
-  rootReducer, 
+  rootReducer,
   applyMiddleware(logger)
 )
 
 render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.getElementById('root')
-  )
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)

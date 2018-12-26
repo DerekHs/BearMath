@@ -10,6 +10,8 @@
     "html-react-parser": "^0.4.7",
     "immutable": "^4.0.0-rc.12",
     "katex": "^0.10.0",
+    "node-sass": "^4.11.0",
+    "npm-check": "^5.9.0",
     "react": "^16.7.0",
     "react-bulma-components": "^2.3.0",
     "react-dom": "^16.7.0",
