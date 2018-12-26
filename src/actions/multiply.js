@@ -1,21 +1,22 @@
-import { MULTIPLY_BEGIN, MULTIPLY_SUCCESS, MULTIPLY_ERROR} from "actions/actions"
+import { MULTIPLY_BEGIN, MULTIPLY_SUCCESS, MULTIPLY_ERROR } from "actions/actions"
 
-function multiplyBegin(m1, m2) {
+export function multiplyBegin(m1, m2, resultVariable) {
     return {
         type: MULTIPLY_BEGIN,
         m1,
-        m2
+        m2,
+        resultVariable
     }
 }
 
-function multiplySuccess(result) {
+export function multiplySuccess(result) {
     return {
         type: MULTIPLY_SUCCESS,
         result
     }
 }
 
-function multiplyError(errorMessage) {
+export function multiplyError(errorMessage) {
     return {
         type: MULTIPLY_ERROR,
         errorMessage

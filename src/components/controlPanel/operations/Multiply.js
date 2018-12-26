@@ -3,14 +3,17 @@ import { connect } from "react-redux"
 import { bindActionCreators } from 'redux'
 
 import { createMatrix } from "actions/matrices"
-import { Dropdown, Level, Button, Box, Field, Control, Input } from "react-bulma-components/full"
+import { multiplyBegin } from "actions/multiply"
+import { Dropdown, Level, Button, Box } from "react-bulma-components/full"
 
 class Multiply extends Component {
   constructor(props) {
     super(props)
     this.onChange1 = this.onChange_1.bind(this)
     this.onChange2 = this.onChange_2.bind(this)
-    this.state = { matrix_1: "", matrix_2: "" }
+    this.updateResultVariable = this.updateResultVariable.bind(this)
+    this.multiply = this.multiply.bind(this)
+    this.state = { matrix_1: "", matrix_2: "", resultVariable: "" }
   }
 
   onChange_1 = selected => {
@@ -20,6 +23,14 @@ class Multiply extends Component {
   onChange_2 = selected => {
     this.setState({ matrix_2: selected });
   };
+
+  updateResultVariable = input => {
+    this.setState({ resultVariable: input.target.value })
+  }
+
+  multiply = () => {
+    this.props.multiplyBegin(1, 2, 3)
+  }
 
   render() {
     return (
@@ -44,17 +55,25 @@ class Multiply extends Component {
 
           <Level.Side align="right">
             <Level.Item>
-              <Field kind="addons">
-                <Control>
-                  <Input placeholder="Find a post" />
-                </Control>
-                <Control>
-                  <Button renderAs="button">Search</Button>
-                </Control>
-              </Field>
+              <input
+                className="input"
+                type="text"
+                value={this.state.resultVariable}
+                placeholder="Store Result As"
+                onChange={this.updateResultVariable} />
             </Level.Item>
           </Level.Side>
 
+        </Level>
+        <br />
+        <Level>
+          <Level.Side align="left">
+          </Level.Side>
+          <Level.Side align="right">
+            <Level.Item>
+              <Button onClick={this.multiply}>Multiply</Button>
+            </Level.Item>
+          </Level.Side>
         </Level>
       </Box>
     );
@@ -69,7 +88,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    createMatrix
+    multiplyBegin
   },
     dispatch)
 }

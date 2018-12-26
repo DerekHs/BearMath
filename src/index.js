@@ -2,9 +2,14 @@ import 'bulma/css/bulma.css'
 
 import React from 'react';
 import { render } from 'react-dom'
+
 import { applyMiddleware, createStore } from 'redux'
 import { Provider } from 'react-redux'
-import rootReducer from './reducers'
+import rootReducer from 'reducers'
+
+import { createEpicMiddleware } from 'redux-observable';
+import { rootEpic } from 'epics'
+
 import { createLogger } from 'redux-logger'
 import Immutable from 'immutable'
 
@@ -26,10 +31,14 @@ const logger = createLogger({
   }
 });
 
+const epicMiddleware = createEpicMiddleware();
+
 const store = createStore(
   rootReducer,
-  applyMiddleware(logger)
+  applyMiddleware(epicMiddleware, logger)
 )
+
+epicMiddleware.run(rootEpic);
 
 render(
   <Provider store={store}>
