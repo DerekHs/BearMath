@@ -1,18 +1,20 @@
 import React from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from "react-redux"
-import { createMatrix } from "../../actions/matrices"
 import { List } from 'immutable';
+
+import { createMatrix } from "actions/matrices"
 
 class InputGrid extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {numRows: props.initialRows, numCols: props.initialCols}
+        this.state = {numRows: props.initialRows, numCols: props.initialCols, matrixName:''}
         this.addRow = this.addRow.bind(this)
         this.addCol = this.addCol.bind(this)
         this.removeRow = this.removeRow.bind(this)
         this.removeCol = this.removeCol.bind(this)
         this.createMatrix = this.createMatrix.bind(this)
+        this.updateMatrixName = this.updateMatrixName.bind(this)
     }
 
     addRow() {
@@ -38,6 +40,12 @@ class InputGrid extends React.Component {
             numCols: Math.max(prevState.numCols - 1, 1)
         }))
     }
+
+    updateMatrixName(newName) {
+        this.setState(
+            {...this.state, matrixName: newName}
+        )
+    }
     
     createMatrix() {
         let numericValues = new List()
@@ -47,13 +55,14 @@ class InputGrid extends React.Component {
             }
         }
         console.log(numericValues)
-        this.props.createMatrix(Math.random(), new List([this.state.numRows, this.state.numCols]), numericValues)
+        this.props.createMatrix(this.state.matrixName, new List([this.state.numRows, this.state.numCols]), numericValues)
         this.props.toggle()
     }
 
     render() {
         return (
             <div className="container">
+                <input className="input" type="text" value={this.state.matrixName} placeholder="Matrix Name" onChange={(e) => this.updateMatrixName(e.target.value)}/>
                 <div className="level">
                     <div>
                         {[...Array(this.state.numRows).keys()].map(i =>  
@@ -84,6 +93,8 @@ class InputGrid extends React.Component {
       )
   }
 }
+
+
   
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({

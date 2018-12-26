@@ -27,8 +27,8 @@ class Matrix extends Component {
         let math = katex.renderToString(this.convertStateToLatex(this.props));
         return (
             <div className="box has-text-centered">
-                {Parser(math)}
-                <p className="m-b-none">{this.props.name}</p>
+                <div>{Parser(math)}</div>
+                <div style={{display: "flex", marginTop: "auto"}}>{this.props.name}</div>
             </div>
       )
     }

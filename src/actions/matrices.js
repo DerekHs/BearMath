@@ -1,4 +1,4 @@
-import { CREATE_MATRIX, DELETE_MATRIX } from "./actions";
+import { CREATE_MATRIX, DELETE_MATRIX } from "actions/actions";
 
 export const createMatrix = (name, shape, numericValues) => ({
     type: CREATE_MATRIX,

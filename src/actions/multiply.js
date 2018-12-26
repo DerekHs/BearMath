@@ -1,4 +1,4 @@
-import { MULTIPLY_BEGIN, MULTIPLY_SUCCESS, MULTIPLY_ERROR} from actions
+import { MULTIPLY_BEGIN, MULTIPLY_SUCCESS, MULTIPLY_ERROR} from "actions/actions"
 
 function multiplyBegin(m1, m2) {
     return {
