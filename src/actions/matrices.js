@@ -1,13 +1,18 @@
 import { CREATE_MATRIX, DELETE_MATRIX } from "actions/actions";
 
-export const createMatrix = (name, shape, numericValues) => ({
-    type: CREATE_MATRIX,
-    name,
-    shape,
-    numericValues
-})
+export function createMatrix(name, shape, numericValues) {
+    console.log(name, shape, numericValues)
+    return {
+        type: CREATE_MATRIX,
+        name,
+        shape,
+        numericValues
+    }
+}
 
-export const deleteMatrix = (name) => ({
-    type: DELETE_MATRIX,
-    name
-})
+export function deleteMatrix(name) {
+    return {
+        type: DELETE_MATRIX,
+        name
+    }
+}

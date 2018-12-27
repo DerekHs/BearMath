@@ -5,6 +5,7 @@ import { ofType } from 'redux-observable'
 
 
 import { multiplySuccess, multiplyError } from 'actions/multiply'
+import { createMatrix } from 'actions/matrices'
 import { MULTIPLY_BEGIN } from 'actions/actions'
 
 export const multiplyEpic = (action$, state$) => action$.pipe(
@@ -25,17 +26,9 @@ export const multiplyEpic = (action$, state$) => action$.pipe(
                     shape: state$.value.matrices.get(action.m2).get("shape").toJS(),
                     data: state$.value.matrices.get(action.m2).get("numericValues").toJS()
                 }
-                // matrix_1: {
-                //     "shape": [2, 3],
-                //     "data": [1, 2, 3, 4, 5, 6]
-                // },
-                // matrix_2: {
-                //     "shape": [3, 2],
-                //     "data": [1, 2, 3, 4, 5, 6]
-                // }
             }
         }).pipe(
-            map(response => multiplySuccess(response)),
+            map(response => createMatrix(action.resultVariable, JSON.parse(response.response.body).shape, JSON.parse(response.response.body).data)),
             catchError(error => of(multiplyError(error)))
         )
     )

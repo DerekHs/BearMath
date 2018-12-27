@@ -10,6 +10,7 @@ export function multiplyBegin(m1, m2, resultVariable) {
 }
 
 export function multiplySuccess(result) {
+    console.log(result + " yay, request succeeded")
     return {
         type: MULTIPLY_SUCCESS,
         result
