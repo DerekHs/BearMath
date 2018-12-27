@@ -12,6 +12,7 @@ import { rootEpic } from 'epics'
 
 import { createLogger } from 'redux-logger'
 import Immutable from 'immutable'
+import 'rxjs';
 
 import App from 'App';
 

@@ -2,14 +2,9 @@ import { CREATE_MATRIX } from "../actions/actions";
 import { OrderedMap, Map, List } from "immutable"
 
 const initialState = new OrderedMap({
-  "example_matrix": new Map({ shape: new List([2, 2]), numericValues: new List([1, 0, 0, 1]) }),
-  "example_matrix_1": new Map({ shape: new List([2, 2]), numericValues: new List([1, 0, 0, 1]) }),
-  "example_matrix_2": new Map({ shape: new List([7, 1]), numericValues: new List([1, 0, 0, 1, 5, 76, 1]) }),
-  "example_matrix_3": new Map({ shape: new List([2, 2]), numericValues: new List([1, 0, 0, 1]) }),
-  "example_matrix_4": new Map({ shape: new List([2, 2]), numericValues: new List([1, 0, 0, 1]) }),
-  "example_matrix_5": new Map({ shape: new List([2, 2]), numericValues: new List([1, 0, 0, 1]) }),
-  "example_matrix_6": new Map({ shape: new List([2, 2]), numericValues: new List([1, 0, 0, 1]) }),
-  "example_matrix_7": new Map({ shape: new List([2, 2]), numericValues: new List([1, 0, 0, 1]) })
+  "identity": new Map({ shape: new List([2, 2]), numericValues: new List([1, 0, 0, 1]) }),
+  "fibonacci_q": new Map({ shape: new List([2, 2]), numericValues: new List([1, 1, 1, 0]) }),
+  "first_fibonacci": new Map({ shape: new List([2, 1]), numericValues: new List([5, 8]) })
 }
 
 

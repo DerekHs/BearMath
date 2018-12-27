@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from "react-redux"
 import { bindActionCreators } from 'redux'
 
-import { createMatrix } from "actions/matrices"
 import { multiplyBegin } from "actions/multiply"
 import { Dropdown, Level, Button, Box } from "react-bulma-components/full"
 
@@ -29,7 +28,7 @@ class Multiply extends Component {
   }
 
   multiply = () => {
-    this.props.multiplyBegin(1, 2, 3)
+    this.props.multiplyBegin(this.state.matrix_1, this.state.matrix_2, this.state.resultVariable)
   }
 
   render() {
