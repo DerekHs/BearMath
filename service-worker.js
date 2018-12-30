@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/%7BBearMath%7D/precache-manifest.fe8aefcad7f75d66aa378bce847604d7.js"
+  "/BearMath/precache-manifest.9a7e5f9432808ffca0d6a4d6377f9c17.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/%7BBearMath%7D/index.html", {
+workbox.routing.registerNavigationRoute("/BearMath/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
