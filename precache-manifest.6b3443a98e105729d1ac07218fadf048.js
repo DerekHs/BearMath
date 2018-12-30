@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/BearMath/static/css/1.b6374c7d.chunk.css"
   },
   {
-    "revision": "2373762f83937ee461feda786064ab8d",
+    "revision": "06bbb5d375c8c199b411268ce9c198fc",
     "url": "/BearMath/index.html"
   }
 ];
