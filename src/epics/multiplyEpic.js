@@ -8,6 +8,8 @@ import { multiplySuccess, multiplyError } from 'actions/multiply'
 import { createMatrix } from 'actions/matrices'
 import { MULTIPLY_BEGIN } from 'actions/actions'
 
+import { List } from 'immutable'
+
 export const multiplyEpic = (action$, state$) => action$.pipe(
     ofType(MULTIPLY_BEGIN),
     mergeMap(action =>
@@ -28,7 +30,7 @@ export const multiplyEpic = (action$, state$) => action$.pipe(
                 }
             }
         }).pipe(
-            map(response => createMatrix(action.resultVariable, JSON.parse(response.response.body).shape, JSON.parse(response.response.body).data)),
+            map(response => createMatrix(action.resultVariable, new List(JSON.parse(response.response.body).shape), new List(JSON.parse(response.response.body).data))),
             catchError(error => of(multiplyError(error)))
         )
     )

@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import { createMatrix } from "actions/matrices"
 import { Dropdown } from "react-bulma-components/full"
 import Multiply from "components/controlPanel/operations/Multiply"
+import Invert from "components/controlPanel/operations/Invert"
 
 class ControlPanel extends Component {
   constructor(props) {
@@ -20,12 +21,14 @@ class ControlPanel extends Component {
     return (
       <div className="box">
         <Dropdown value={this.state.selected} onChange={this.onChange} color="info">
-          <Dropdown.Item value="none">Select</Dropdown.Item>
+          <Dropdown.Item value="">Select</Dropdown.Item>
           <Dropdown.Divider />
           <Dropdown.Item value="multiply">Multiply</Dropdown.Item>
+          <Dropdown.Item value="invert">Invert</Dropdown.Item>
         </Dropdown>
         <hr />
         {this.state.selected === "multiply" && <Multiply />}
+        {this.state.selected === "invert" && <Invert />}
       </div>
     );
   }

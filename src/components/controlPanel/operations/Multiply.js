@@ -38,6 +38,7 @@ class Multiply extends Component {
           <Level.Side align="left">
             <Level.Item>
               <Dropdown value={this.state.matrix_1} onChange={this.onChange1}>
+                <Dropdown.Item value="">Select Matrix</Dropdown.Item>
                 {this.props.matrices.keySeq().map(k =>
                   <Dropdown.Item key={k} value={k}>{k}</Dropdown.Item>
                 )}
@@ -45,6 +46,7 @@ class Multiply extends Component {
             </Level.Item>
             <Level.Item>
               <Dropdown value={this.state.matrix_2} onChange={this.onChange2}>
+                <Dropdown.Item value="">Select Matrix</Dropdown.Item>
                 {this.props.matrices.keySeq().map(k =>
                   <Dropdown.Item key={k} value={k}>{k}</Dropdown.Item>
                 )}
