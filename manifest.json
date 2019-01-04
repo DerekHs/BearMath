@@ -1,6 +1,6 @@
 {
-  "short_name": "Bear Math",
-  "name": "A Minimalist Linear Algebra UI",
+  "short_name": "React App",
+  "name": "Create React App Sample",
   "icons": [
     {
       "src": "favicon.ico",
