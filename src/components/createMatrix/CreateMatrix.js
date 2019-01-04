@@ -1,6 +1,6 @@
 import React from 'react';
-import ModalWrapper from 'components/modal/ModalWrapper'
-import InputGrid from 'components/modal/InputGrid'
+import ModalWrapper from 'components/common/ModalWrapper'
+import InputGrid from 'components/common/InputGrid'
 
 class CreateMatrix extends React.Component {
   render() {
@@ -10,7 +10,7 @@ class CreateMatrix extends React.Component {
           Create New Matrix
         </button>
         Create New Matrix
-        <InputGrid initialRows={2} initialCols={2} />
+        <InputGrid initialRows={2} initialCols={2} create />
       </ModalWrapper>
     )
   }

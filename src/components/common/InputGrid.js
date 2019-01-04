@@ -8,13 +8,29 @@ import { createMatrix } from "actions/matrices"
 class InputGrid extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { numRows: props.initialRows, numCols: props.initialCols, matrixName: '' }
+        if (this.props.create) {
+            this.state = {
+                numRows: props.initialRows,
+                numCols: props.initialCols,
+                matrixName: ''
+            }
+        }
+
+        else if (this.props.edit) {
+            this.state = {
+                numRows: props.data.get('shape').get(0),
+                numCols: props.data.get('shape').get(1),
+                numericValues: props.data.get('numericValues'),
+                matrixName: props.matrixName
+            }
+        }
         this.addRow = this.addRow.bind(this)
         this.addCol = this.addCol.bind(this)
         this.removeRow = this.removeRow.bind(this)
         this.removeCol = this.removeCol.bind(this)
         this.createMatrix = this.createMatrix.bind(this)
         this.updateMatrixName = this.updateMatrixName.bind(this)
+        this.getStartingValue = this.getStartingValue.bind(this)
     }
 
     addRow() {
@@ -54,9 +70,15 @@ class InputGrid extends React.Component {
                 numericValues = numericValues.push(this[`textInput${r},${c}`].value)
             }
         }
-        console.log(numericValues)
         this.props.createMatrix(this.state.matrixName, new List([this.state.numRows, this.state.numCols]), numericValues)
         this.props.toggle()
+    }
+
+    getStartingValue(i, j) {
+        if (this.state.numericValues) {
+            return this.state.numericValues.get(i * this.state.numCols + j)
+        }
+        return 0
     }
 
     render() {
@@ -78,7 +100,7 @@ class InputGrid extends React.Component {
                                             type="text"
                                             size="4"
                                             style={{ fontSize: "20px" }}
-                                            defaultValue="0"
+                                            defaultValue={this.getStartingValue(i, j)}
                                             key={`${i},${j}`}
                                             ref={input => { this[`textInput${i},${j}`] = input }} />
                                     )}
@@ -95,7 +117,7 @@ class InputGrid extends React.Component {
                     <span className="button is-small" onClick={this.removeCol}>Rem. Col</span>
                     <span className="button is-small" onClick={this.addCol}>Add Col</span>
                     <div style={{ paddingTop: "40px" }}>
-                        <button onClick={this.createMatrix}>Create Matrix</button>
+                        <button className="button" onClick={this.createMatrix}>Submit</button>
                     </div>
                 </div>
             </div>

@@ -9,40 +9,40 @@ class ModalWrapper extends React.Component {
     };
     this.toggleModal = this.toggleModal.bind(this);
   }
-  
-  toggleModal() {    
+
+  toggleModal() {
     this.setState((prev, props) => {
       const newState = !prev.modalState;
-      
+
       return { modalState: newState };
     });
   }
-  
+
   render() {
-    return(
-        <div className="container">
-          <div className="has-text-centered content">
-            {React.cloneElement(this.props.children[0], {onClick: this.toggleModal})}
-          </div>
-          
-          <Modal 
-            closeModal={this.toggleModal} 
-            modalState={this.state.modalState} 
-            title={this.props.children[1]}
-          >
-            {React.cloneElement(this.props.children[2], {toggle: this.toggleModal})}
-          </Modal>
+    return (
+      <div>
+        <div>
+          {React.cloneElement(this.props.children[0], { onClick: this.toggleModal })}
         </div>
+
+        <Modal
+          closeModal={this.toggleModal}
+          modalState={this.state.modalState}
+          title={this.props.children[1]}
+        >
+          {React.cloneElement(this.props.children[2], { toggle: this.toggleModal })}
+        </Modal>
+      </div>
     );
   }
 }
 
 const Modal = ({ children, closeModal, modalState, title }) => {
-  if(!modalState) {
+  if (!modalState) {
     return null;
   }
-  
-  return(
+
+  return (
     <div className="modal is-active">
       <div className="modal-background" onClick={closeModal} />
       <div className="modal-card">

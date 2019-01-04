@@ -1,4 +1,4 @@
-import { CREATE_MATRIX } from "../actions/actions";
+import { CREATE_MATRIX, DELETE_MATRIX } from "../actions/actions";
 import { OrderedMap, Map, List } from "immutable"
 
 const initialState = new OrderedMap({
@@ -9,8 +9,9 @@ const initialState = new OrderedMap({
 const matrices = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_MATRIX:
-      console.log("create matrix")
       return state.set(action.name, new Map({ shape: action.shape, numericValues: action.numericValues }))
+    case DELETE_MATRIX:
+      return state.remove(action.name)
     default:
       return state
   }
