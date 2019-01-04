@@ -110,15 +110,15 @@ class InputGrid extends React.Component {
 
     render() {
         let ret = (
-            <div className="columns">
-                <div className="column">
+            <div className="columns is-mobile">
+                <div className="column is-mobile">
                     <input
                         className="input"
                         type="text"
                         value={this.state.matrixName}
                         placeholder="Matrix Name"
                         onChange={(e) => this.updateMatrixName(e.target.value)} />
-                    <div className="columns" style={{ paddingTop: "25px" }}>
+                    <div className="columns is-mobile" style={{ paddingTop: "25px" }}>
                         <div className="column is-narrow">
                             {[...Array(this.state.numRows).keys()].map(i =>
                                 <div key={i}>
