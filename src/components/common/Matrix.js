@@ -25,11 +25,7 @@ class Matrix extends Component {
     render() {
         let math = katex.renderToString(this.convertStateToLatex(this.props));
         return (
-            <div className="box has-text-centered" onClick={this.props.onClick}>
-                <i className="fas fa-pencil-alt"></i>
-                <div>{Parser(math)}</div>
-                <div style={{ display: "flex", marginTop: "auto" }}>{this.props.name}</div>
-            </div>
+            <div>{Parser(math)}</div>
         )
     }
 }

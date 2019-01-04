@@ -5,7 +5,7 @@ import { ofType } from 'redux-observable'
 
 
 import { multiplySuccess, multiplyError } from 'actions/multiply'
-import { createMatrix } from 'actions/matrices'
+import { upsertMatrix } from 'actions/matrices'
 import { MULTIPLY_BEGIN } from 'actions/actions'
 
 import { List } from 'immutable'
@@ -30,7 +30,7 @@ export const multiplyEpic = (action$, state$) => action$.pipe(
                 }
             }
         }).pipe(
-            map(response => createMatrix(action.resultVariable, new List(JSON.parse(response.response.body).shape), new List(JSON.parse(response.response.body).data))),
+            map(response => upsertMatrix(action.resultVariable, new List(JSON.parse(response.response.body).shape), new List(JSON.parse(response.response.body).data))),
             catchError(error => of(multiplyError(error)))
         )
     )

@@ -1,4 +1,4 @@
-import { CREATE_MATRIX, DELETE_MATRIX } from "../actions/actions";
+import { UPSERT_MATRIX, RENAME_MATRIX, DELETE_MATRIX } from "../actions/actions";
 import { OrderedMap, Map, List } from "immutable"
 
 const initialState = new OrderedMap({
@@ -8,8 +8,18 @@ const initialState = new OrderedMap({
 
 const matrices = (state = initialState, action) => {
   switch (action.type) {
-    case CREATE_MATRIX:
+    case UPSERT_MATRIX:
+      if (state.contains(action.name)) {
+        return state.updateIn([action.name], () => new Map({ shape: action.shape, numericValues: action.numericValues }))
+      }
       return state.set(action.name, new Map({ shape: action.shape, numericValues: action.numericValues }))
+    case RENAME_MATRIX:
+      return state.mapKeys(k => {
+        if (k == action.name) {
+          return action.newName
+        }
+        return k
+      })
     case DELETE_MATRIX:
       return state.remove(action.name)
     default:

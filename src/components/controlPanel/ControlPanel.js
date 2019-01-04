@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux"
 import { bindActionCreators } from 'redux'
 
-import { createMatrix } from "actions/matrices"
+import { upsertMatrix } from "actions/matrices"
 import { Dropdown } from "react-bulma-components/full"
 import Multiply from "components/controlPanel/operations/Multiply"
 import Invert from "components/controlPanel/operations/Invert"
@@ -42,7 +42,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    createMatrix
+    upsertMatrix
   },
     dispatch)
 }

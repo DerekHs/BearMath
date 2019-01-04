@@ -3,12 +3,14 @@ import { bindActionCreators } from 'redux'
 import { connect } from "react-redux"
 import { List } from 'immutable';
 
-import { createMatrix } from "actions/matrices"
+import { upsertMatrix } from "actions/matrices"
+import { renameMatrix } from "actions/matrices"
 
 class InputGrid extends React.Component {
     constructor(props) {
         super(props)
-        if (this.props.create) {
+        this.finishedPopulating = false
+        if (props.create) {
             this.state = {
                 numRows: props.initialRows,
                 numCols: props.initialCols,
@@ -16,7 +18,7 @@ class InputGrid extends React.Component {
             }
         }
 
-        else if (this.props.edit) {
+        else if (props.edit) {
             this.state = {
                 numRows: props.data.get('shape').get(0),
                 numCols: props.data.get('shape').get(1),
@@ -24,13 +26,28 @@ class InputGrid extends React.Component {
                 matrixName: props.matrixName
             }
         }
+
+        else if (props.clone) {
+            var today = new Date();
+            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            var timestamp = date + ' ' + time
+            this.state = {
+                numRows: props.data.get('shape').get(0),
+                numCols: props.data.get('shape').get(1),
+                numericValues: props.data.get('numericValues'),
+                matrixName: props.matrixName + ' ' + "__CLONED_AT__" + timestamp
+            }
+        }
+
         this.addRow = this.addRow.bind(this)
         this.addCol = this.addCol.bind(this)
         this.removeRow = this.removeRow.bind(this)
         this.removeCol = this.removeCol.bind(this)
-        this.createMatrix = this.createMatrix.bind(this)
+        this.submit = this.submit.bind(this)
         this.updateMatrixName = this.updateMatrixName.bind(this)
         this.getStartingValue = this.getStartingValue.bind(this)
+        this.setFinishedPopulating = this.setFinishedPopulating.bind(this)
     }
 
     addRow() {
@@ -63,26 +80,36 @@ class InputGrid extends React.Component {
         )
     }
 
-    createMatrix() {
+    submit() {
         let numericValues = new List()
         for (let r = 0; r < this.state.numRows; r++) {
             for (let c = 0; c < this.state.numCols; c++) {
                 numericValues = numericValues.push(this[`textInput${r},${c}`].value)
             }
         }
-        this.props.createMatrix(this.state.matrixName, new List([this.state.numRows, this.state.numCols]), numericValues)
+        if (this.props.edit) {
+            this.props.upsertMatrix(this.props.matrixName, new List([this.state.numRows, this.state.numCols]), numericValues)
+            this.props.renameMatrix(this.props.matrixName, this.state.matrixName)
+        }
+        this.props.upsertMatrix(this.state.matrixName, new List([this.state.numRows, this.state.numCols]), numericValues)
         this.props.toggle()
     }
 
     getStartingValue(i, j) {
-        if (this.state.numericValues) {
+        if (this.state.numericValues &&
+            i * this.state.numCols + j < this.state.numericValues.size &&
+            !this.finishedPopulating) {
             return this.state.numericValues.get(i * this.state.numCols + j)
         }
         return 0
     }
 
+    setFinishedPopulating(status) {
+        this.finishedPopulating = status
+    }
+
     render() {
-        return (
+        let ret = (
             <div className="columns">
                 <div className="column">
                     <input
@@ -98,6 +125,7 @@ class InputGrid extends React.Component {
                                     {[...Array(this.state.numCols).keys()].map(j =>
                                         <input
                                             type="text"
+                                            disabled={this.props.clone}
                                             size="4"
                                             style={{ fontSize: "20px" }}
                                             defaultValue={this.getStartingValue(i, j)}
@@ -107,21 +135,27 @@ class InputGrid extends React.Component {
                                     <br />
                                 </div>)}
                         </div>
-                        <div className="column is-one-fifth">
+                        <div className="column is-one-fifth has-text-left">
                             <button className="button is-small" onClick={this.removeRow}>Rem. Row</button>
                             <br />
                             <button className="button is-small" onClick={this.addRow}>Add Row</button>
                         </div>
                     </div>
 
-                    <span className="button is-small" onClick={this.removeCol}>Rem. Col</span>
-                    <span className="button is-small" onClick={this.addCol}>Add Col</span>
-                    <div style={{ paddingTop: "40px" }}>
-                        <button className="button" onClick={this.createMatrix}>Submit</button>
+                    <div className="columns" >
+                        <div className="column is-narrow has-text-left">
+                            <span className="button is-small" onClick={this.removeCol}>Rem. Col</span>
+                            <span className="button is-small" onClick={this.addCol}>Add Col</span>
+                            <div style={{ paddingTop: "20px" }}>
+                                <button className="button" onClick={this.submit}>Submit</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         )
+        this.setFinishedPopulating(true)
+        return ret
     }
 }
 
@@ -129,7 +163,8 @@ class InputGrid extends React.Component {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        createMatrix
+        upsertMatrix,
+        renameMatrix
     },
         dispatch)
 }

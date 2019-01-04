@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux"
 
-import EditableMatrix from 'components/matricesBank/EditableMatrix';
+import RichMatrix from 'components/matricesBank/RichMatrix';
 
 
 class MatricesBank extends Component {
@@ -14,9 +14,9 @@ class MatricesBank extends Component {
           <div className="columns is-multiline">
             {this.props.matrices.entrySeq().map(([k, v]) =>
               <div className="column is-narrow" key={k}>
-                <EditableMatrix
+                <RichMatrix
                   data={v}
-                  name={k}
+                  matrixName={k}
                   key={k}
                 />
               </div>
