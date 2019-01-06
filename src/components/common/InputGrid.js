@@ -36,7 +36,7 @@ class InputGrid extends React.Component {
                 numRows: props.data.get('shape').get(0),
                 numCols: props.data.get('shape').get(1),
                 numericValues: props.data.get('numericValues'),
-                matrixName: props.matrixName + ' ' + "__CLONED_AT__" + timestamp
+                matrixName: props.matrixName + ' __CLONED_AT__' + timestamp
             }
         }
 
@@ -90,9 +90,10 @@ class InputGrid extends React.Component {
         if (this.props.edit) {
             this.props.upsertMatrix(this.props.matrixName, new List([this.state.numRows, this.state.numCols]), numericValues)
             this.props.renameMatrix(this.props.matrixName, this.state.matrixName)
+        } else {
+            this.props.upsertMatrix(this.state.matrixName, new List([this.state.numRows, this.state.numCols]), numericValues)
+            this.props.toggle()
         }
-        this.props.upsertMatrix(this.state.matrixName, new List([this.state.numRows, this.state.numCols]), numericValues)
-        this.props.toggle()
     }
 
     getStartingValue(i, j) {

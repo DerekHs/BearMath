@@ -13,7 +13,7 @@ class MatricesBank extends Component {
         <div className="box">
           <div className="columns is-multiline">
             {this.props.matrices.entrySeq().map(([k, v]) =>
-              <div className="column is-narrow" key={k}>
+              <div className="column is-narrow is-mobile" key={k}>
                 <RichMatrix
                   data={v}
                   matrixName={k}

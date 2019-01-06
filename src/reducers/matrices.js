@@ -15,7 +15,7 @@ const matrices = (state = initialState, action) => {
       return state.set(action.name, new Map({ shape: action.shape, numericValues: action.numericValues }))
     case RENAME_MATRIX:
       return state.mapKeys(k => {
-        if (k == action.name) {
+        if (k === action.name) {
           return action.newName
         }
         return k

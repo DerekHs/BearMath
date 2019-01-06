@@ -24,7 +24,6 @@ class ControlPanel extends Component {
           <Dropdown.Item value="">Select</Dropdown.Item>
           <Dropdown.Divider />
           <Dropdown.Item value="multiply">Multiply</Dropdown.Item>
-          <Dropdown.Item value="invert">Invert</Dropdown.Item>
         </Dropdown>
         <hr />
         {this.state.selected === "multiply" && <Multiply />}
