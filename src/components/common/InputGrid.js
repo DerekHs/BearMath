@@ -1,7 +1,6 @@
 import React from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from "react-redux"
-import { List } from 'immutable';
 
 import { upsertMatrix } from "actions/matrices"
 import { renameMatrix } from "actions/matrices"
@@ -20,9 +19,9 @@ class InputGrid extends React.Component {
 
         else if (props.edit) {
             this.state = {
-                numRows: props.data.get('shape').get(0),
-                numCols: props.data.get('shape').get(1),
-                numericValues: props.data.get('numericValues'),
+                numRows: props.shape[0],
+                numCols: props.shape[1],
+                numericValues: props.numericValues,
                 matrixName: props.matrixName
             }
         }
@@ -33,9 +32,9 @@ class InputGrid extends React.Component {
             var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
             var timestamp = date + ' ' + time
             this.state = {
-                numRows: props.data.get('shape').get(0),
-                numCols: props.data.get('shape').get(1),
-                numericValues: props.data.get('numericValues'),
+                numRows: props.shape[0],
+                numCols: props.shape[1],
+                numericValues: props.numericValues,
                 matrixName: props.matrixName + ' __CLONED_AT__' + timestamp
             }
         }
@@ -81,26 +80,26 @@ class InputGrid extends React.Component {
     }
 
     submit() {
-        let numericValues = new List()
+        let numericValues = []
         for (let r = 0; r < this.state.numRows; r++) {
             for (let c = 0; c < this.state.numCols; c++) {
-                numericValues = numericValues.push(this[`textInput${r},${c}`].value)
+                numericValues.push(parseFloat(this[`textInput${r},${c}`].value))
             }
         }
         if (this.props.edit) {
-            this.props.upsertMatrix(this.props.matrixName, new List([this.state.numRows, this.state.numCols]), numericValues)
+            this.props.upsertMatrix(this.props.matrixName, [this.state.numRows, this.state.numCols], numericValues)
             this.props.renameMatrix(this.props.matrixName, this.state.matrixName)
         } else {
-            this.props.upsertMatrix(this.state.matrixName, new List([this.state.numRows, this.state.numCols]), numericValues)
+            this.props.upsertMatrix(this.state.matrixName, [this.state.numRows, this.state.numCols], numericValues)
             this.props.toggle()
         }
     }
 
     getStartingValue(i, j) {
         if (this.state.numericValues &&
-            i * this.state.numCols + j < this.state.numericValues.size &&
+            i * this.state.numCols + j < this.state.numericValues.length &&
             !this.finishedPopulating) {
-            return this.state.numericValues.get(i * this.state.numCols + j)
+            return parseFloat(this.state.numericValues[i * this.state.numCols + j].toFixed(5))
         }
         return 0
     }
@@ -126,7 +125,6 @@ class InputGrid extends React.Component {
                                     {[...Array(this.state.numCols).keys()].map(j =>
                                         <input
                                             type="text"
-                                            disabled={this.props.clone}
                                             size="4"
                                             style={{ fontSize: "20px" }}
                                             defaultValue={this.getStartingValue(i, j)}

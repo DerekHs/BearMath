@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux"
 import { bindActionCreators } from 'redux'
 
-import { multiplyBegin } from "actions/multiply"
+import { invert } from "actions/operations"
 import { Dropdown, Level, Button, Box } from "react-bulma-components/full"
 
 class Invert extends Component {
@@ -10,12 +10,11 @@ class Invert extends Component {
         super(props)
         this.matrixSelected = this.matrixSelected.bind(this)
         this.updateResultVariable = this.updateResultVariable.bind(this)
-        this.multiply = this.multiply.bind(this)
+        this.invert = this.invert.bind(this)
         this.state = { matrix: "", resultVariable: "" }
     }
 
     matrixSelected = function (selected) {
-        console.log(selected)
         this.setState({ matrix: selected });
         if (selected !== "") {
             this.setState({ resultVariable: `${selected}_INV` })
@@ -28,8 +27,8 @@ class Invert extends Component {
         this.setState({ resultVariable: input.target.value })
     }
 
-    multiply = () => {
-        this.props.multiplyBegin(this.state.matrix_1, this.state.matrix_2, this.state.resultVariable)
+    invert = () => {
+        this.props.invert(this.state.matrix, this.state.resultVariable)
     }
 
     render() {
@@ -65,7 +64,7 @@ class Invert extends Component {
                     </Level.Side>
                     <Level.Side align="right">
                         <Level.Item>
-                            <Button onClick={this.multiply}>Multiply</Button>
+                            <Button onClick={this.invert}>Invert</Button>
                         </Level.Item>
                     </Level.Side>
                 </Level>
@@ -82,7 +81,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        multiplyBegin
+        invert
     },
         dispatch)
 }

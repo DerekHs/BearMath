@@ -8,9 +8,9 @@ class EditableMatrix extends React.Component {
     render() {
         return (
             <ModalWrapper>
-                <Matrix data={this.props.data} name={this.props.name} onClick={this.props.onClick} />
+                <Matrix {...props} onClick={this.props.onClick} />
                 {this.props.name}
-                <InputGrid data={this.props.data} matrixName={this.props.name} edit />
+                <InputGrid {...props} edit />
             </ModalWrapper>
         )
     }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { List } from 'immutable';
 import katex from 'katex';
 import Parser from 'html-react-parser';
@@ -6,12 +6,11 @@ import Parser from 'html-react-parser';
 const START = "\\begin{pmatrix}"
 const END = "\\end{pmatrix}"
 
-class Matrix extends Component {
+class Matrix extends React.Component {
     convertStateToLatex(props) {
         let fragments = new List()
-        var numericValues = props.data.get('numericValues')
-        var rows, cols
-        [rows, cols] = props.data.get('shape')
+        var numericValues = new List(props.numericValues).map(val => parseFloat(val.toFixed(5)))
+        var [rows, cols] = props.shape
         var count
         for (count = 0; count < rows; count++) {
             fragments = fragments

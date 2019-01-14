@@ -19,15 +19,19 @@ class ControlPanel extends Component {
 
   render() {
     return (
-      <div className="box">
-        <Dropdown value={this.state.selected} onChange={this.onChange} color="info">
-          <Dropdown.Item value="">Select</Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item value="multiply">Multiply</Dropdown.Item>
-        </Dropdown>
-        <hr />
-        {this.state.selected === "multiply" && <Multiply />}
-        {this.state.selected === "invert" && <Invert />}
+      <div>
+        <h2 className="title is-2">Operations</h2>
+        <div className="box">
+          <Dropdown value={this.state.selected} onChange={this.onChange} color="info">
+            <Dropdown.Item value="">Select</Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item value="multiply">Multiply</Dropdown.Item>
+            <Dropdown.Item value="invert">Invert</Dropdown.Item>
+          </Dropdown>
+          <hr />
+          {this.state.selected === "multiply" && <Multiply />}
+          {this.state.selected === "invert" && <Invert />}
+        </div>
       </div>
     );
   }

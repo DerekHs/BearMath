@@ -9,27 +9,28 @@ import ResponsiveIcon from "components/common/ResponsiveIcon"
 
 class RichMatrix extends React.Component {
     render() {
+        var { matrixName, deleteMatrix, ...other } = this.props
         return (
             <div className="box has-text-centered">
-                <Matrix data={this.props.data} />
+                <Matrix {...other} />
                 {this.props.matrixName}
                 <br />
                 <span className="icon has-text-info" >
                     <ModalWrapper>
                         <ResponsiveIcon icon="fa-edit" title="Edit the matrix in place" />
                         {this.props.name}
-                        <InputGrid data={this.props.data} matrixName={this.props.matrixName} edit />
+                        <InputGrid {...other} matrixName={matrixName} edit />
                     </ModalWrapper>
                 </span>
                 <span className="icon has-text-info" >
                     <ModalWrapper>
                         <ResponsiveIcon icon="fa-clone" title="Create a duplicate of this matrix" />
                         {this.props.name}
-                        <InputGrid data={this.props.data} matrixName={this.props.matrixName} clone />
+                        <InputGrid {...other} matrixName={matrixName} clone />
                     </ModalWrapper>
                 </span>
                 <span className="icon has-text-info" >
-                    <ResponsiveIcon icon="fa-trash-alt" onClick={() => this.props.deleteMatrix(this.props.matrixName)} title="Delete this matrix" />
+                    <ResponsiveIcon icon="fa-trash-alt" onClick={() => deleteMatrix(matrixName)} title="Delete this matrix" />
                 </span>
             </div>
         )
