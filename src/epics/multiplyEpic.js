@@ -7,8 +7,7 @@ import { ofType } from 'redux-observable'
 import { multiplySuccess, multiplyError } from 'actions/multiply'
 import { upsertMatrix } from 'actions/matrices'
 import { MULTIPLY_BEGIN } from 'actions/actions'
-
-import { List } from 'immutable'
+import Ndarray from "util/Ndarray"
 
 export const multiplyEpic = (action$, state$) => action$.pipe(
     ofType(MULTIPLY_BEGIN),
@@ -20,17 +19,11 @@ export const multiplyEpic = (action$, state$) => action$.pipe(
                 'Content-Type': 'application/json'
             },
             body: {
-                matrix_1: {
-                    shape: state$.value.matrices.get(action.m1).get("shape").toJS(),
-                    data: state$.value.matrices.get(action.m1).get("numericValues").toJS()
-                },
-                matrix_2: {
-                    shape: state$.value.matrices.get(action.m2).get("shape").toJS(),
-                    data: state$.value.matrices.get(action.m2).get("numericValues").toJS()
-                }
+                matrix_1: state$.value.matrices.get(action.m1).toMap(),
+                matrix_2: state$.value.matrices.get(action.m2).toMap()
             }
         }).pipe(
-            map(response => upsertMatrix(action.resultVariable, new List(JSON.parse(response.response.body).shape), new List(JSON.parse(response.response.body).data))),
+            map(response => upsertMatrix(action.resultVariable, JSON.parse(response.response.body).shape, JSON.parse(response.response.body).numericValues)),
             catchError(error => of(multiplyError(error)))
         )
     )

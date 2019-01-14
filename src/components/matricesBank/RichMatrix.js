@@ -11,21 +11,21 @@ class RichMatrix extends React.Component {
     render() {
         return (
             <div className="box has-text-centered">
-                <Matrix data={this.props.data} />
+                <Matrix ndarray={this.props.ndarray} />
                 {this.props.matrixName}
                 <br />
                 <span className="icon has-text-info" >
                     <ModalWrapper>
                         <ResponsiveIcon icon="fa-edit" title="Edit the matrix in place" />
                         {this.props.name}
-                        <InputGrid data={this.props.data} matrixName={this.props.matrixName} edit />
+                        <InputGrid ndarray={this.props.ndarray} matrixName={this.props.matrixName} edit />
                     </ModalWrapper>
                 </span>
                 <span className="icon has-text-info" >
                     <ModalWrapper>
                         <ResponsiveIcon icon="fa-clone" title="Create a duplicate of this matrix" />
                         {this.props.name}
-                        <InputGrid data={this.props.data} matrixName={this.props.matrixName} clone />
+                        <InputGrid ndarray={this.props.ndarray} matrixName={this.props.matrixName} clone />
                     </ModalWrapper>
                 </span>
                 <span className="icon has-text-info" >

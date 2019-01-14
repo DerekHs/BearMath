@@ -1,18 +1,19 @@
 import { UPSERT_MATRIX, RENAME_MATRIX, DELETE_MATRIX } from "../actions/actions";
 import { OrderedMap, Map, List } from "immutable"
 
+import Ndarray from "util/Ndarray"
+
 const initialState = new OrderedMap({
-  "fibonacci_q": new Map({ shape: new List([2, 2]), numericValues: new List([1, 1, 1, 0]) }),
-  "first_fibonacci": new Map({ shape: new List([2, 1]), numericValues: new List([1, 1]) })
+  foo: new Ndarray([1, 1, 1, 0], [2, 2])
 })
 
 const matrices = (state = initialState, action) => {
   switch (action.type) {
     case UPSERT_MATRIX:
       if (state.contains(action.name)) {
-        return state.updateIn([action.name], () => new Map({ shape: action.shape, numericValues: action.numericValues }))
+        return state.updateIn([action.name], () => new Ndarray(action.numericValues, action.shape))
       }
-      return state.set(action.name, new Map({ shape: action.shape, numericValues: action.numericValues }))
+      return state.set(action.name, new Ndarray(action.numericValues, action.shape))
     case RENAME_MATRIX:
       return state.mapKeys(k => {
         if (k === action.name) {

@@ -15,7 +15,7 @@ class MatricesBank extends Component {
             {this.props.matrices.entrySeq().map(([k, v]) =>
               <div className="column is-narrow is-mobile" key={k}>
                 <RichMatrix
-                  data={v}
+                  ndarray={v}
                   matrixName={k}
                   key={k}
                 />

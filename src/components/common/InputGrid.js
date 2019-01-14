@@ -20,9 +20,9 @@ class InputGrid extends React.Component {
 
         else if (props.edit) {
             this.state = {
-                numRows: props.data.get('shape').get(0),
-                numCols: props.data.get('shape').get(1),
-                numericValues: props.data.get('numericValues'),
+                numRows: props.ndarray.rows(),
+                numCols: props.ndarray.cols(),
+                numericValues: props.ndarray.numericValues,
                 matrixName: props.matrixName
             }
         }
@@ -33,9 +33,9 @@ class InputGrid extends React.Component {
             var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
             var timestamp = date + ' ' + time
             this.state = {
-                numRows: props.data.get('shape').get(0),
-                numCols: props.data.get('shape').get(1),
-                numericValues: props.data.get('numericValues'),
+                numRows: props.ndarray.rows(),
+                numCols: props.ndarray.cols(),
+                numericValues: props.ndarray.numericValues,
                 matrixName: props.matrixName + ' __CLONED_AT__' + timestamp
             }
         }
