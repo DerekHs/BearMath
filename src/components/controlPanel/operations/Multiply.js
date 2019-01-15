@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from "react-redux"
 import { bindActionCreators } from 'redux'
 
 import { operationBegin } from "actions/operation"
 import { Dropdown, Level, Button, Box } from "react-bulma-components/full"
 
-class Multiply extends Component {
+class Multiply extends React.Component {
   constructor(props) {
     super(props)
     this.onChange1 = this.onChange_1.bind(this)
@@ -80,9 +80,9 @@ class Multiply extends Component {
         <br />
         <Level>
           <Level.Side align="left">
-            {this.state.displayWarning && <div className="notification is-warning">
+            {this.state.displayWarning && this.props.mostRecentError && <div className="notification is-warning">
               <button className="delete" onClick={this.closeWarning}></button>
-              {this.props.mostRecentError}
+              <p><b>Numpy Error: </b>{this.props.mostRecentError}</p>
             </div>}
           </Level.Side>
           <Level.Side align="right">

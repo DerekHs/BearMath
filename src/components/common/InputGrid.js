@@ -131,7 +131,7 @@ class InputGrid extends React.Component {
                                             style={{ fontSize: "20px" }}
                                             defaultValue={this.getStartingValue(i, j)}
                                             key={`${i},${j}`}
-                                            ref={input => { this[`textInput${i},${j}`] = input }} />
+                                            ref={element => { this[`textInput${i},${j}`] = element }} />
                                     )}
                                     <br />
                                 </div>)}

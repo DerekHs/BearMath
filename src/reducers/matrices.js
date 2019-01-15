@@ -1,4 +1,4 @@
-import { UPSERT_MATRIX, RENAME_MATRIX, DELETE_MATRIX, OPERATION_SUCCESS } from "../actions/actions";
+import { UPSERT_MATRIX, RENAME_MATRIX, DELETE_MATRIX, OPERATION_BEGIN, OPERATION_SUCCESS } from "../actions/actions";
 import { OrderedMap } from "immutable"
 
 import Ndarray from "util/Ndarray"
@@ -13,6 +13,8 @@ const initialState = {
 
 const matrices = (state = initialState, action) => {
   switch (action.type) {
+    case OPERATION_BEGIN:
+      return { ...state, mostRecentError: "" }
     case UPSERT_MATRIX:
       if (state.matrixMap.contains(action.name)) {
         return {
