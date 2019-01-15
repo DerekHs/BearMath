@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import { Dropdown } from "react-bulma-components/full"
-import Multiply from "components/controlPanel/operations/Multiply"
 import GenericOperation from "components/controlPanel/operations/GenericOperation"
 import * as Creators from "components/controlPanel/CodeCreators"
 
@@ -19,7 +18,7 @@ class ControlPanel extends Component {
     return (
       <div className="box">
         <Dropdown value={this.state.selected} onChange={this.onChange} color="info">
-          <Dropdown.Item value="">Select</Dropdown.Item>
+          <Dropdown.Item value="">Select Matrix Operation</Dropdown.Item>
           <Dropdown.Divider />
           <Dropdown.Item value="invert">Invert</Dropdown.Item>
           <Dropdown.Item value="transpose">Transpose</Dropdown.Item>

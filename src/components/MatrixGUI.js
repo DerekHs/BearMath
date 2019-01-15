@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import MatricesBank from "components/matricesBank/MatricesBank"
-import CreateMatrix from "components/createMatrix/CreateMatrix"
+import MatricesBank from "components/banks/matricesBank/MatricesBank"
+import CompositeBank from "components/banks/compositeBank/CompositeBank"
 import ControlPanel from "components/controlPanel/ControlPanel"
 
 class MatrixGUI extends Component {
@@ -10,10 +10,10 @@ class MatrixGUI extends Component {
     return (
       <div className="container">
         <section className="section">
-          <CreateMatrix />
+          <MatricesBank />
         </section>
         <section className="section">
-          <MatricesBank />
+          <CompositeBank />
         </section>
         <section className="section">
           <ControlPanel />

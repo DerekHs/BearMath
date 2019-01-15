@@ -119,14 +119,13 @@ class InputGrid extends React.Component {
                         value={this.state.matrixName}
                         placeholder="Matrix Name"
                         onChange={(e) => this.updateMatrixName(e.target.value)} />
-                    <div className="columns" style={{ paddingTop: "25px" }}>
+                    <div className="columns is-mobile" style={{ paddingTop: "25px" }}>
                         <div className="column is-narrow">
                             {[...Array(this.state.numRows).keys()].map(i =>
                                 <div key={i}>
                                     {[...Array(this.state.numCols).keys()].map(j =>
                                         <input
                                             type="text"
-                                            disabled={this.props.clone}
                                             size="4"
                                             style={{ fontSize: "20px" }}
                                             defaultValue={this.getStartingValue(i, j)}
@@ -137,7 +136,7 @@ class InputGrid extends React.Component {
                                 </div>)}
                         </div>
                         <div className="column is-one-fifth has-text-left">
-                            <button className="button is-small" onClick={this.removeRow}>Rem. Row</button>
+                            <button className="button is-small" onClick={this.removeRow}>Remove Row</button>
                             <br />
                             <button className="button is-small" onClick={this.addRow}>Add Row</button>
                         </div>
@@ -145,7 +144,7 @@ class InputGrid extends React.Component {
 
                     <div className="columns" >
                         <div className="column is-narrow has-text-left">
-                            <span className="button is-small" onClick={this.removeCol}>Rem. Col</span>
+                            <span className="button is-small" onClick={this.removeCol}>Remove Col</span>
                             <span className="button is-small" onClick={this.addCol}>Add Col</span>
                             <div style={{ paddingTop: "20px" }}>
                                 <button className="button" onClick={this.submit}>Submit</button>
