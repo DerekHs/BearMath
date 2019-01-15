@@ -21,14 +21,18 @@ class ControlPanel extends Component {
         <Dropdown value={this.state.selected} onChange={this.onChange} color="info">
           <Dropdown.Item value="">Select</Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item value="multiply">Multiply</Dropdown.Item>
           <Dropdown.Item value="invert">Invert</Dropdown.Item>
           <Dropdown.Item value="transpose">Transpose</Dropdown.Item>
+          <Dropdown.Item value="add">Add</Dropdown.Item>
+          <Dropdown.Item value="subtract">Subtract</Dropdown.Item>
+          <Dropdown.Item value="multiply">Multiply</Dropdown.Item>
         </Dropdown>
         <hr />
-        {this.state.selected === "multiply" && <Multiply />}
         {this.state.selected === "invert" && <GenericOperation numDropdowns={1} codeCreator={Creators.invert} />}
         {this.state.selected === "transpose" && <GenericOperation numDropdowns={1} codeCreator={Creators.transpose} />}
+        {this.state.selected === "add" && <GenericOperation numDropdowns={2} codeCreator={Creators.add} />}
+        {this.state.selected === "subtract" && <GenericOperation numDropdowns={2} codeCreator={Creators.subtract} />}
+        {this.state.selected === "multiply" && <GenericOperation numDropdowns={2} codeCreator={Creators.multiply} />}
       </div>
     );
   }
