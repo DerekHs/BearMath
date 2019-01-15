@@ -28,6 +28,6 @@ export const operationEpic = (action$, state$) => action$.pipe(
 )
 
 function createBody(matrixNames, matrices) {
-    let matrixValues = matrixNames.map(name => matrices.get(name).toMap())
+    let matrixValues = matrixNames.map(name => ["NDARRAY", matrices.get(name).toMap()])
     return Object.assign(...matrixNames.map((k, i) => ({ [k]: matrixValues[i] })))
 }
