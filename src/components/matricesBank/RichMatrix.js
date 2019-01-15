@@ -17,14 +17,14 @@ class RichMatrix extends React.Component {
                 <span className="icon has-text-info" >
                     <ModalWrapper>
                         <ResponsiveIcon icon="fa-edit" title="Edit the matrix in place" />
-                        {this.props.name}
+                        {`edit ${this.props.matrixName}`}
                         <InputGrid ndarray={this.props.ndarray} matrixName={this.props.matrixName} edit />
                     </ModalWrapper>
                 </span>
                 <span className="icon has-text-info" >
                     <ModalWrapper>
                         <ResponsiveIcon icon="fa-clone" title="Create a duplicate of this matrix" />
-                        {this.props.name}
+                        {`clone ${this.props.matrixName}`}
                         <InputGrid ndarray={this.props.ndarray} matrixName={this.props.matrixName} clone />
                     </ModalWrapper>
                 </span>

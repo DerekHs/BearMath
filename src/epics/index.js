@@ -1,6 +1,6 @@
 import { combineEpics } from 'redux-observable';
-import { multiplyEpic } from 'epics/multiplyEpic'
+import { operationEpic } from 'epics/operationEpic'
 
 export const rootEpic = combineEpics(
-    multiplyEpic,
+    operationEpic,
 );

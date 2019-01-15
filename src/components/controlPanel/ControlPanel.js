@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from "react-redux"
 import { bindActionCreators } from 'redux'
 
-import { upsertMatrix } from "actions/matrices"
 import { Dropdown } from "react-bulma-components/full"
 import Multiply from "components/controlPanel/operations/Multiply"
 import Invert from "components/controlPanel/operations/Invert"
@@ -33,17 +32,4 @@ class ControlPanel extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    matrices: state.matrices
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    upsertMatrix
-  },
-    dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ControlPanel);
+export default ControlPanel

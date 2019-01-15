@@ -1,7 +1,6 @@
 import React from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from "react-redux"
-import { List } from 'immutable';
 
 import { upsertMatrix } from "actions/matrices"
 import { renameMatrix } from "actions/matrices"
@@ -9,22 +8,24 @@ import { renameMatrix } from "actions/matrices"
 class InputGrid extends React.Component {
     constructor(props) {
         super(props)
-        this.finishedPopulating = false
         if (props.create) {
             this.state = {
                 numRows: props.initialRows,
                 numCols: props.initialCols,
                 matrixName: ''
             }
+            this.finishedPopulating = true
         }
 
         else if (props.edit) {
+            console.log(props.ndarray)
             this.state = {
                 numRows: props.ndarray.rows(),
                 numCols: props.ndarray.cols(),
                 numericValues: props.ndarray.numericValues,
                 matrixName: props.matrixName
             }
+            this.finishedPopulating = false
         }
 
         else if (props.clone) {
@@ -38,6 +39,7 @@ class InputGrid extends React.Component {
                 numericValues: props.ndarray.numericValues,
                 matrixName: props.matrixName + ' __CLONED_AT__' + timestamp
             }
+            this.finishedPopulating = false
         }
 
         this.addRow = this.addRow.bind(this)
@@ -81,26 +83,24 @@ class InputGrid extends React.Component {
     }
 
     submit() {
-        let numericValues = new List()
+        let numericValues = []
         for (let r = 0; r < this.state.numRows; r++) {
             for (let c = 0; c < this.state.numCols; c++) {
-                numericValues = numericValues.push(this[`textInput${r},${c}`].value)
+                numericValues.push(this[`textInput${r},${c}`].value)
             }
         }
         if (this.props.edit) {
-            this.props.upsertMatrix(this.props.matrixName, new List([this.state.numRows, this.state.numCols]), numericValues)
+            this.props.upsertMatrix(this.props.matrixName, [this.state.numRows, this.state.numCols], numericValues)
             this.props.renameMatrix(this.props.matrixName, this.state.matrixName)
         } else {
-            this.props.upsertMatrix(this.state.matrixName, new List([this.state.numRows, this.state.numCols]), numericValues)
+            this.props.upsertMatrix(this.state.matrixName, [this.state.numRows, this.state.numCols], numericValues)
             this.props.toggle()
         }
     }
 
     getStartingValue(i, j) {
-        if (this.state.numericValues &&
-            i * this.state.numCols + j < this.state.numericValues.size &&
-            !this.finishedPopulating) {
-            return this.state.numericValues.get(i * this.state.numCols + j)
+        if (!this.finishedPopulating) {
+            return this.state.numericValues[i * this.state.numCols + j]
         }
         return 0
     }

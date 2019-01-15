@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux"
 import { bindActionCreators } from 'redux'
 
-import { multiplyBegin } from "actions/multiply"
+import { operationBegin } from "actions/operation"
 import { Dropdown, Level, Button, Box } from "react-bulma-components/full"
 
 class Multiply extends Component {
@@ -28,7 +28,7 @@ class Multiply extends Component {
   }
 
   multiply = () => {
-    this.props.multiplyBegin(this.state.matrix_1, this.state.matrix_2, this.state.resultVariable)
+    this.props.operationBegin(`np.dot(${this.state.matrix_1}, ${this.state.matrix_2})`, [this.state.matrix_1, this.state.matrix_2], this.state.resultVariable)
   }
 
   render() {
@@ -39,7 +39,7 @@ class Multiply extends Component {
             <Level.Item>
               <Dropdown value={this.state.matrix_1} onChange={this.onChange1}>
                 <Dropdown.Item value="">Select Matrix</Dropdown.Item>
-                {this.props.matrices.keySeq().map(k =>
+                {this.props.matrixMap.keySeq().map(k =>
                   <Dropdown.Item key={k} value={k}>{k}</Dropdown.Item>
                 )}
               </Dropdown>
@@ -47,7 +47,7 @@ class Multiply extends Component {
             <Level.Item>
               <Dropdown value={this.state.matrix_2} onChange={this.onChange2}>
                 <Dropdown.Item value="">Select Matrix</Dropdown.Item>
-                {this.props.matrices.keySeq().map(k =>
+                {this.props.matrixMap.keySeq().map(k =>
                   <Dropdown.Item key={k} value={k}>{k}</Dropdown.Item>
                 )}
               </Dropdown>
@@ -83,13 +83,13 @@ class Multiply extends Component {
 
 function mapStateToProps(state) {
   return {
-    matrices: state.matrices
+    matrixMap: state.matrices.matrixMap
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    multiplyBegin
+    operationBegin
   },
     dispatch)
 }
