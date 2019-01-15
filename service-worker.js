@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/BearMath/precache-manifest.bb2d01df87cdda3d645d79d3612dad38.js"
+  "/BearMath/precache-manifest.79b578a0b4f78a9c2e804bf62337304b.js"
 );
 
 workbox.clientsClaim();
