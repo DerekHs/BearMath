@@ -5,7 +5,8 @@ import Ndarray from "util/Ndarray"
 
 const initialState = {
   "matrixMap": new OrderedMap({
-    foo: new Ndarray([1, 1, 1, 0], [2, 2])
+    foo: new Ndarray([1, 1, 1, 0], [2, 2]),
+    fos: new Ndarray([1, 1], [1, 2])
   }),
   "mostRecentError": ""
 }
@@ -52,7 +53,7 @@ const matrices = (state = initialState, action) => {
           matrixMap: state.matrixMap.set(action.resultVariable, new Ndarray(ndarray.numericValues, ndarray.shape))
         }
       } else {
-        console.log("error")
+        return { ...state, mostRecentError: action.result.result }
       }
     default:
       return state

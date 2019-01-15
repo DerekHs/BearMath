@@ -94,8 +94,8 @@ class InputGrid extends React.Component {
             this.props.renameMatrix(this.props.matrixName, this.state.matrixName)
         } else {
             this.props.upsertMatrix(this.state.matrixName, [this.state.numRows, this.state.numCols], numericValues)
-            this.props.toggle()
         }
+        this.props.toggle()
     }
 
     getStartingValue(i, j) {

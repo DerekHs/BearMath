@@ -12,7 +12,9 @@ class Multiply extends Component {
     this.onChange2 = this.onChange_2.bind(this)
     this.updateResultVariable = this.updateResultVariable.bind(this)
     this.multiply = this.multiply.bind(this)
-    this.state = { matrix_1: "", matrix_2: "", resultVariable: "" }
+    this.showWarning = this.showWarning.bind(this)
+    this.closeWarning = this.closeWarning.bind(this)
+    this.state = { matrix_1: "", matrix_2: "", resultVariable: "", displayWarning: false }
   }
 
   onChange_1 = selected => {
@@ -29,6 +31,15 @@ class Multiply extends Component {
 
   multiply = () => {
     this.props.operationBegin(`np.dot(${this.state.matrix_1}, ${this.state.matrix_2})`, [this.state.matrix_1, this.state.matrix_2], this.state.resultVariable)
+    this.showWarning()
+  }
+
+  showWarning = () => {
+    this.setState({ displayWarning: true })
+  }
+
+  closeWarning = () => {
+    this.setState({ displayWarning: false })
   }
 
   render() {
@@ -69,6 +80,10 @@ class Multiply extends Component {
         <br />
         <Level>
           <Level.Side align="left">
+            {this.state.displayWarning && <div className="notification is-warning">
+              <button className="delete" onClick={this.closeWarning}></button>
+              {this.props.mostRecentError}
+            </div>}
           </Level.Side>
           <Level.Side align="right">
             <Level.Item>
@@ -83,7 +98,8 @@ class Multiply extends Component {
 
 function mapStateToProps(state) {
   return {
-    matrixMap: state.matrices.matrixMap
+    matrixMap: state.matrices.matrixMap,
+    mostRecentError: state.matrices.mostRecentError
   }
 }
 
