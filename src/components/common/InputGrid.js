@@ -119,6 +119,7 @@ class InputGrid extends React.Component {
                         value={this.state.matrixName}
                         placeholder="Matrix Name"
                         onChange={(e) => this.updateMatrixName(e.target.value)} />
+                    <p className="help is-danger">Matrix name must be a valid python variable name</p>
                     <div className="columns is-mobile" style={{ paddingTop: "25px" }}>
                         <div className="column is-narrow">
                             {[...Array(this.state.numRows).keys()].map(i =>

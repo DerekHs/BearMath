@@ -11,6 +11,9 @@ class CreateMatrix extends React.Component {
         </button>
         Create New Matrix
         <InputGrid initialRows={2} initialCols={2} create />
+        <button className="button is-primary">
+          Submit
+        </button>
       </ModalWrapper>
     )
   }
