@@ -18,7 +18,7 @@ export const operationEpic = (action$, state$) => action$.pipe(
             },
             body: {
                 command: action.command,
-                matrices: createBody(action.matrixNames, state$.value.matrices.matrixMap)
+                matrices: createBody(action.dataNames, state$.value.matrices.matrixMap)
             }
         }).pipe(
             map(response => operationSuccess(action.resultVariable, response.response.body)),

@@ -16,7 +16,13 @@ class GenericOperation extends React.Component {
     }
     operate = () => {
         let argv = [...Array(this.props.numDropdowns).keys()].map(i => this[`dropdown${i}`].value)
-        this.props.operationBegin(this.props.codeCreator(argv), argv, this["resultName"].value)
+        this.props.operationBegin(
+            this.props.codeCreator(argv),
+            argv,
+            this.props.dataTypes,
+            this["resultName"].value,
+            this.props.misc
+        )
         this.showWarning()
     }
 

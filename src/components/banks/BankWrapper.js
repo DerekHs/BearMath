@@ -16,7 +16,7 @@ class BankWrapper extends Component {
                     </div>
                 </nav>
                 <div className="box">
-                    <div className="columns is-multiline">
+                    <div className="columns is-multiline is-mobile">
                         {this.props.children}
                     </div>
                 </div>
