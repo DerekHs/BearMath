@@ -5,7 +5,7 @@ class CompositeMatrix extends React.Component {
     render() {
         return (
             <div className="box has-text-centered">
-                <div className="columns">
+                <div className="columns is-multiline">
                     {this.props.composite.nameMatrixPairs.map(([name, ndarray]) =>
                         <div className="column" key={name}>
                             <div className="box">

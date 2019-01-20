@@ -25,13 +25,15 @@ class ControlPanel extends Component {
           <Dropdown.Item value="add">Add</Dropdown.Item>
           <Dropdown.Item value="subtract">Subtract</Dropdown.Item>
           <Dropdown.Item value="multiply">Multiply</Dropdown.Item>
+          <Dropdown.Item value="svd">SVD</Dropdown.Item>
         </Dropdown>
         <hr />
-        {this.state.selected === "invert" && <GenericOperation numDropdowns={1} codeCreator={Creators.invert} />}
-        {this.state.selected === "transpose" && <GenericOperation numDropdowns={1} codeCreator={Creators.transpose} />}
-        {this.state.selected === "add" && <GenericOperation numDropdowns={2} codeCreator={Creators.add} />}
-        {this.state.selected === "subtract" && <GenericOperation numDropdowns={2} codeCreator={Creators.subtract} />}
-        {this.state.selected === "multiply" && <GenericOperation numDropdowns={2} codeCreator={Creators.multiply} />}
+        {this.state.selected === "invert" && <GenericOperation numDropdowns={1} codeCreator={Creators.invert} dataTypes={Creators.invertTypes} />}
+        {this.state.selected === "transpose" && <GenericOperation numDropdowns={1} codeCreator={Creators.transpose} dataTypes={Creators.transposeTypes} />}
+        {this.state.selected === "add" && <GenericOperation numDropdowns={2} codeCreator={Creators.add} dataTypes={Creators.addTypes} />}
+        {this.state.selected === "subtract" && <GenericOperation numDropdowns={2} codeCreator={Creators.subtract} dataTypes={Creators.subtractTypes} />}
+        {this.state.selected === "multiply" && <GenericOperation numDropdowns={2} codeCreator={Creators.multiply} dataTypes={Creators.multiplyTypes} />}
+        {this.state.selected === "svd" && <GenericOperation numDropdowns={1} codeCreator={Creators.svd} dataTypes={Creators.svdTypes} misc={{ "namev": ["a", "b", "c"] }} />}
       </div>
     );
   }

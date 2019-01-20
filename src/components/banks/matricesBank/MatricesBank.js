@@ -27,7 +27,7 @@ class MatricesBank extends Component {
 
 function mapStateToProps(state) {
   return {
-    matrixMap: state.matrices.matrixMap
+    matrixMap: state.matrices
   }
 }
 

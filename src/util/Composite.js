@@ -1,6 +1,5 @@
 export default class Composite {
-    constructor(compositeName, namev, ndarrayv) {
-        this.compositeName = compositeName
+    constructor(namev, ndarrayv) {
         this.namev = namev
         this.ndarrayv = ndarrayv
     }

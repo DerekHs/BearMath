@@ -15,6 +15,7 @@ class GenericOperation extends React.Component {
         this.state = { matrix_1: "", matrix_2: "", resultVariable: "", displayWarning: false }
     }
     operate = () => {
+        console.log(this.props)
         let argv = [...Array(this.props.numDropdowns).keys()].map(i => this[`dropdown${i}`].value)
         this.props.operationBegin(
             this.props.codeCreator(argv),
@@ -86,8 +87,8 @@ class GenericOperation extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        matrixMap: state.matrices.matrixMap,
-        mostRecentError: state.matrices.mostRecentError
+        matrixMap: state.matrices,
+        mostRecentError: state.error
     }
 }
 

@@ -12,7 +12,7 @@ class CompositeBank extends Component {
             <BankWrapper title="Composite Matrices">
                 {
                     this.props.compositeMap.entrySeq().map(([k, v]) =>
-                        <div className="column is-narrow is-mobile" key={k}>
+                        <div className="column is-narrow" key={k}>
                             <CompositeMatrix composite={v} matrixName={k} />
                         </div>
                     )
