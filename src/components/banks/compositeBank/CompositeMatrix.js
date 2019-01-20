@@ -15,7 +15,7 @@ class CompositeMatrix extends React.Component {
                         </div>
                     )}
                 </div>
-                {this.props.matrixName}
+                <b>{this.props.matrixName}</b>
             </div>
         )
     }

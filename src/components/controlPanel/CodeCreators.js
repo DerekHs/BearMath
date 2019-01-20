@@ -24,6 +24,11 @@ export function multiply(argv) {
 export const multiplyTypes = ["NDARRAY", "NDARRAY"]
 
 export function svd(argv) {
-    return `np.linalg.svd(${argv[0]})`
+    return `np.linalg.svd(${argv[0]}, full_matrices=False)`
 }
 export const svdTypes = ["NDARRAY"]
+
+export function eigenvectors(argv) {
+    return `np.linalg.eig(${argv[0]})`
+}
+export const eigenvectorsTypes = ["NDARRAY"]

@@ -17,15 +17,21 @@ class ControlPanel extends Component {
   render() {
     return (
       <div className="box">
+        <h2 className="subtitle is-3">Operations</h2>
         <Dropdown value={this.state.selected} onChange={this.onChange} color="info">
-          <Dropdown.Item value="">Select Matrix Operation</Dropdown.Item>
+          <Dropdown.Item value="">Matrix Arithmetic</Dropdown.Item>
           <Dropdown.Divider />
           <Dropdown.Item value="invert">Invert</Dropdown.Item>
           <Dropdown.Item value="transpose">Transpose</Dropdown.Item>
           <Dropdown.Item value="add">Add</Dropdown.Item>
           <Dropdown.Item value="subtract">Subtract</Dropdown.Item>
           <Dropdown.Item value="multiply">Multiply</Dropdown.Item>
+        </Dropdown>{' '}
+        <Dropdown value={this.state.selected} onChange={this.onChange} color="info">
+          <Dropdown.Item value="">Matrix Decomposition</Dropdown.Item>
+          <Dropdown.Divider />
           <Dropdown.Item value="svd">SVD</Dropdown.Item>
+          <Dropdown.Item value="eigenvectors">Eigenvectors</Dropdown.Item>
         </Dropdown>
         <hr />
         {this.state.selected === "invert" && <GenericOperation numDropdowns={1} codeCreator={Creators.invert} dataTypes={Creators.invertTypes} />}
@@ -33,7 +39,8 @@ class ControlPanel extends Component {
         {this.state.selected === "add" && <GenericOperation numDropdowns={2} codeCreator={Creators.add} dataTypes={Creators.addTypes} />}
         {this.state.selected === "subtract" && <GenericOperation numDropdowns={2} codeCreator={Creators.subtract} dataTypes={Creators.subtractTypes} />}
         {this.state.selected === "multiply" && <GenericOperation numDropdowns={2} codeCreator={Creators.multiply} dataTypes={Creators.multiplyTypes} />}
-        {this.state.selected === "svd" && <GenericOperation numDropdowns={1} codeCreator={Creators.svd} dataTypes={Creators.svdTypes} misc={{ "namev": ["a", "b", "c"] }} />}
+        {this.state.selected === "svd" && <GenericOperation numDropdowns={1} codeCreator={Creators.svd} dataTypes={Creators.svdTypes} misc={{ "namev": ["U", "Σ", "V"] }} />}
+        {this.state.selected === "eigenvectors" && <GenericOperation numDropdowns={1} codeCreator={Creators.eigenvectors} dataTypes={Creators.eigenvectorsTypes} misc={{ "namev": ["eigenvalues", "eigenvectors"] }} />}
       </div>
     );
   }

@@ -6,8 +6,7 @@ import RichMatrix from 'components/banks/matricesBank/RichMatrix';
 import BankWrapper from "components/banks/BankWrapper"
 
 
-class MatricesBank extends Component {
-
+class MatrixBank extends Component {
   render() {
     return (
       <BankWrapper title="Matrices" createNew={<CreateMatrix />}>
@@ -25,10 +24,10 @@ class MatricesBank extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapMatricesToProps(state) {
   return {
     matrixMap: state.matrices
   }
 }
 
-export default connect(mapStateToProps)(MatricesBank);
+export default connect(mapMatricesToProps)(MatrixBank);
