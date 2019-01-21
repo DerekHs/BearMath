@@ -8,8 +8,7 @@ const ndarrayv = [new Ndarray([1, 1, 1, 0], [2, 2]), new Ndarray([1, 1, 1, 4], [
 const namev = ["sasuke", "sakura", "naruto"]
 
 const initialState = new OrderedMap({
-    ninjas: new Composite(namev, ndarrayv),
-    samurai: new Composite(namev, ndarrayv)
+    ninjas: new Composite(namev, ndarrayv)
 })
 
 const matrices = (state = initialState, action) => {

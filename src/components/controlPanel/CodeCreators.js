@@ -32,3 +32,8 @@ export function eigenvectors(argv) {
     return `np.linalg.eig(${argv[0]})`
 }
 export const eigenvectorsTypes = ["NDARRAY"]
+
+export function qr(argv) {
+    return `np.linalg.qr(${argv[0]})`
+}
+export const qrTypes = ["NDARRAY"]

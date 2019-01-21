@@ -4,9 +4,8 @@ import { OrderedMap } from "immutable"
 import Ndarray from "util/Ndarray"
 
 const initialState = new OrderedMap({
-  foo: new Ndarray([1, 1, 1, 0], [2, 2]),
-  fos: new Ndarray([1, 1], [1, 2]),
-  example: new Ndarray([3, 2, 2, 2, 3, -2], [2, 3])
+  findMyEigenvalues: new Ndarray([1, 2, 3, 4], [2, 2]),
+  findMySVD: new Ndarray([3, 2, 2, 2, 3, -2], [2, 3])
 })
 
 const matrices = (state = initialState, action) => {
@@ -26,14 +25,15 @@ const matrices = (state = initialState, action) => {
     case DELETE_MATRIX:
       return state.remove(action.name)
     case OPERATION_SUCCESS:
-      if (action.result.validOperation && action.result.dataType === 'SCALAR') {
+      if (action.result.validOperation && action.result.dataType === 'NDARRAY') {
         let ndarray = action.result.result
         if (state.contains(action.result.resultVariable)) {
           return state.updateIn([action.resultVariable], () => new Ndarray(ndarray.numericValues, ndarray.shape))
         }
         return state.set(action.resultVariable, new Ndarray(ndarray.numericValues, ndarray.shape))
+      } else {
+        return state
       }
-      return state
     default:
       return state
   }

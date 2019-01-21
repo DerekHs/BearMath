@@ -1,9 +1,8 @@
-import { UPSERT_MATRIX, RENAME_MATRIX, DELETE_MATRIX, OPERATION_SUCCESS } from "../actions/actions";
+import { UPSERT_SCALAR, RENAME_SCALAR, DELETE_SCALAR, OPERATION_SUCCESS } from "../actions/actions";
 import { OrderedMap } from "immutable"
 
 const initialState = new OrderedMap({
-    meaningOfLife: 42,
-    weinersConstant: 2
+    LegendresConstant: 1.
 })
 
 const scalars = (state = initialState, action) => {
