@@ -1,13 +1,13 @@
 {
-  "main.js": "/BearMath/static/js/main.6514536c.chunk.js",
-  "main.js.map": "/BearMath/static/js/main.6514536c.chunk.js.map",
+  "main.js": "/BearMath/static/js/main.0208c33e.chunk.js",
+  "main.js.map": "/BearMath/static/js/main.0208c33e.chunk.js.map",
   "static/css/1.df4fb497.chunk.css": "/BearMath/static/css/1.df4fb497.chunk.css",
-  "static/js/1.65ef1307.chunk.js": "/BearMath/static/js/1.65ef1307.chunk.js",
-  "static/js/1.65ef1307.chunk.js.map": "/BearMath/static/js/1.65ef1307.chunk.js.map",
+  "static/js/1.45a4e4e0.chunk.js": "/BearMath/static/js/1.45a4e4e0.chunk.js",
+  "static/js/1.45a4e4e0.chunk.js.map": "/BearMath/static/js/1.45a4e4e0.chunk.js.map",
   "runtime~main.js": "/BearMath/static/js/runtime~main.fd2abdaf.js",
   "runtime~main.js.map": "/BearMath/static/js/runtime~main.fd2abdaf.js.map",
   "static/css/1.df4fb497.chunk.css.map": "/BearMath/static/css/1.df4fb497.chunk.css.map",
   "index.html": "/BearMath/index.html",
-  "precache-manifest.fb6cbbaddf20dec9fb616a600a82613d.js": "/BearMath/precache-manifest.fb6cbbaddf20dec9fb616a600a82613d.js",
+  "precache-manifest.327d70c4cdcb7a6124b877ac4daadad2.js": "/BearMath/precache-manifest.327d70c4cdcb7a6124b877ac4daadad2.js",
   "service-worker.js": "/BearMath/service-worker.js"
 }
