@@ -14,12 +14,11 @@ const initialState = new OrderedMap({
 })
 
 const values = (state = initialState, action) => {
+  var dataTypeObjectPair
   switch (action.type) {
     case UPSERT_MATRIX:
-      if (state.contains(action.name)) {
-        return state.updateIn([action.name], () => new Ndarray(action.numericValues, action.shape))
-      }
-      return state.set(action.name, new Ndarray(action.numericValues, action.shape))
+      dataTypeObjectPair = ["NDARRAY", new Ndarray(action.numericValues, action.shape)]
+      return upsert(state, action.name, dataTypeObjectPair)
     case RENAME_MATRIX:
       return state.mapKeys(k => {
         if (k === action.name) {
@@ -30,18 +29,38 @@ const values = (state = initialState, action) => {
     case DELETE_MATRIX:
       return state.remove(action.name)
     case OPERATION_SUCCESS:
-      if (action.result.validOperation && action.result.dataType === 'NDARRAY') {
-        let ndarray = action.result.result
-        if (state.contains(action.result.resultVariable)) {
-          return state.updateIn([action.resultVariable], () => new Ndarray(ndarray.numericValues, ndarray.shape))
+      if (action.result.validOperation) {
+        switch (action.result.dataType) {
+          case "NDARRAY": {
+            dataTypeObjectPair = ["NDARRAY", new Ndarray(action.result.result.numericValues, action.result.result.shape)]
+            break
+          }
+          case "TUPLE": {
+            dataTypeObjectPair = ["TUPLE", new Tuple(action.misc.namev, action.result.result.map(entry =>
+              new Ndarray(entry.numericValues, entry.shape)))]
+            break
+          }
+          case "SCALAR": {
+            dataTypeObjectPair = ["SCALAR", action.result.result]
+            break
+          }
+          default:
+            break
         }
-        return state.set(action.resultVariable, new Ndarray(ndarray.numericValues, ndarray.shape))
+        return upsert(state, action.resultVariable, dataTypeObjectPair)
       } else {
         return state
       }
     default:
       return state
   }
+}
+
+function upsert(state, name, dataTypeObjectPair) {
+  if (state.contains(name)) {
+    return state.updateIn([name], () => dataTypeObjectPair)
+  }
+  return state.set(name, dataTypeObjectPair)
 }
 
 export default values

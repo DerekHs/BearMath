@@ -18,7 +18,7 @@ export const operationEpic = (action$, state$) => action$.pipe(
             },
             body: {
                 command: action.command,
-                matrices: createBody(action.dataNames, action.dataTypes, state$.value)
+                matrices: createBody(action.dataNames, state$.value.values)
             }
         }).pipe(
             map(response => operationSuccess(action.resultVariable, response.response.body, action.misc)),
@@ -27,25 +27,8 @@ export const operationEpic = (action$, state$) => action$.pipe(
     )
 )
 
-function createBody(dataNames, dataTypes, state) {
-    function lookupMatrix(matrixType, matrixName) {
-        var databank = null
-        switch (matrixType) {
-            case "NDARRAY":
-                databank = state.matrices
-                break
-            case "TUPLE":
-                databank = state.composites
-                break
-            case "SCALAR":
-                databank = state.scalars
-                break
-            default:
-                return null
-        }
-        return databank.get(matrixName)
-    }
-
-    let typeDataTuples = dataTypes.map((dataType, index) => [dataType, lookupMatrix(dataType, dataNames[index])])
-    return Object.assign(...dataNames.map((k, i) => ({ [k]: typeDataTuples[i] })))
+function createBody(dataNames, state) {
+    let dataValues = dataNames.map(name => [state.get(name)[0], state.get(name)[1].toMap()])
+    console.log(Object.assign(...dataNames.map((k, i) => ({ [k]: dataValues[i] }))))
+    return Object.assign(...dataNames.map((k, i) => ({ [k]: dataValues[i] })))
 }

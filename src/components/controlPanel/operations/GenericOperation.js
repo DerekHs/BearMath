@@ -45,7 +45,7 @@ class GenericOperation extends React.Component {
                                 <div className="select">
                                     <select defaultValue="" ref={element => { this[`dropdown${i}`] = element }}>
                                         <option value="" disabled>{placeholder}</option>
-                                        {this.props.matrixMap.keySeq().map(k =>
+                                        {this.props.workspaceValues.keySeq().map(k =>
                                             <option value={k} key={k}>{k}</option>
                                         )}
                                     </select>
@@ -87,7 +87,7 @@ class GenericOperation extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        matrixMap: state.matrices,
+        workspaceValues: state.values,
         mostRecentError: state.error
     }
 }
