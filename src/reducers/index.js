@@ -1,15 +1,11 @@
 
 import { combineReducers } from 'redux'
-import matrices from './matrices'
+import values from './values'
 import generatedCode from './generatedCode'
-import composites from './composites'
-import scalars from './scalars'
 import error from './error'
 
 export default combineReducers({
-    matrices,
+    values,
     generatedCode,
-    composites,
-    scalars,
     error
 })

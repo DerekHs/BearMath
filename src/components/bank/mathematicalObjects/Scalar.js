@@ -6,8 +6,8 @@ class Scalar extends React.Component {
     render() {
         return (
             <div className="box has-text-centered">
-                {this.props.value}
-                <p>{this.props.scalarName}</p>
+                <b>{this.props.numerics}</b>
+                <p>{this.props.name}</p>
             </div>
         )
     }

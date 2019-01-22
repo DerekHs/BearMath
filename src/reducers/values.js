@@ -2,13 +2,18 @@ import { UPSERT_MATRIX, RENAME_MATRIX, DELETE_MATRIX, OPERATION_SUCCESS } from "
 import { OrderedMap } from "immutable"
 
 import Ndarray from "util/Ndarray"
+import Tuple from "util/Tuple"
+
+const ndarrayv = [new Ndarray([1, 1, 1, 0], [2, 2]), new Ndarray([1, 1, 1, 4], [2, 2]), new Ndarray([1, 1, 1, 4], [2, 2])]
+const namev = ["charmander", "bulbasaur", "squirtle"]
 
 const initialState = new OrderedMap({
-  findMyEigenvalues: new Ndarray([1, 2, 3, 4], [2, 2]),
-  findMySVD: new Ndarray([3, 2, 2, 2, 3, -2], [2, 3])
+  exampleScalar: ["SCALAR", 5],
+  exampleNdarray: ["NDARRAY", new Ndarray([1, 2, 3, 4], [2, 2])],
+  exampleTuple: ["TUPLE", new Tuple(namev, ndarrayv)]
 })
 
-const matrices = (state = initialState, action) => {
+const values = (state = initialState, action) => {
   switch (action.type) {
     case UPSERT_MATRIX:
       if (state.contains(action.name)) {
@@ -39,4 +44,4 @@ const matrices = (state = initialState, action) => {
   }
 }
 
-export default matrices
+export default values

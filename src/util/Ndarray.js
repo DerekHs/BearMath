@@ -11,11 +11,4 @@ export default class Ndarray {
     cols() {
         return this.shape[1]
     }
-
-    toMap() {
-        return {
-            numericValues: this.numericValues,
-            shape: this.shape
-        }
-    }
 }

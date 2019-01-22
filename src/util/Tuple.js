@@ -1,4 +1,4 @@
-export default class Composite {
+export default class Tuple {
     constructor(namev, ndarrayv) {
         this.namev = namev
         this.ndarrayv = ndarrayv

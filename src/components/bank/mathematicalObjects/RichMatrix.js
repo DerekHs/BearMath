@@ -11,25 +11,25 @@ class RichMatrix extends React.Component {
     render() {
         return (
             <div className="box has-text-centered">
-                <Matrix ndarray={this.props.ndarray} />
-                {this.props.matrixName}
+                <Matrix ndarray={this.props.numerics} />
+                {this.props.name}
                 <br />
                 <span className="icon has-text-info" >
                     <ModalWrapper>
                         <ResponsiveIcon icon="fa-edit" title="Edit the matrix in place" />
-                        {`edit ${this.props.matrixName}`}
-                        <InputGrid ndarray={this.props.ndarray} matrixName={this.props.matrixName} edit />
+                        {`edit ${this.props.name}`}
+                        <InputGrid ndarray={this.props.numerics} matrixName={this.props.name} edit />
                     </ModalWrapper>
                 </span>
                 <span className="icon has-text-info" >
                     <ModalWrapper>
                         <ResponsiveIcon icon="fa-clone" title="Create a duplicate of this matrix" />
                         {`clone ${this.props.matrixName}`}
-                        <InputGrid ndarray={this.props.ndarray} matrixName={this.props.matrixName} clone />
+                        <InputGrid ndarray={this.props.numerics} matrixName={this.props.name} clone />
                     </ModalWrapper>
                 </span>
                 <span className="icon has-text-info" >
-                    <ResponsiveIcon icon="fa-trash-alt" onClick={() => this.props.deleteMatrix(this.props.matrixName)} title="Delete this matrix" />
+                    <ResponsiveIcon icon="fa-trash-alt" onClick={() => this.props.deleteMatrix(this.props.name)} title="Delete this matrix" />
                 </span>
             </div>
         )

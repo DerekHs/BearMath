@@ -1,0 +1,45 @@
+import React, { Component } from 'react';
+import { connect } from "react-redux"
+
+import CreateMatrix from "components/createMatrix/CreateMatrix"
+import BankWrapper from "components/bank/BankWrapper"
+
+import RichMatrix from "components/bank/mathematicalObjects/RichMatrix"
+import Tuple from "components/bank/mathematicalObjects/Tuple"
+import Scalar from "components/bank/mathematicalObjects/Scalar"
+
+
+class MatrixBank extends Component {
+  render() {
+    return (
+      <BankWrapper title="Workspace" createNew={<CreateMatrix />}>
+        {this.props.matrixMap.entrySeq().map(([k, v]) =>
+          <div className="column is-narrow is-mobile" key={k}>
+            {renderHelper(k, ...v)}
+          </div>
+        )}
+      </BankWrapper>
+    );
+  }
+}
+
+const renderHelper = (name, type, numerics) => {
+  switch (type) {
+    case "SCALAR":
+      return (<Scalar name={name} numerics={numerics} />)
+    case "NDARRAY":
+      return (<RichMatrix name={name} numerics={numerics} />)
+    case "TUPLE":
+      return (<Tuple name={name} numerics={numerics} />)
+    default:
+      return null
+  }
+}
+
+function mapMatricesToProps(state) {
+  return {
+    matrixMap: state.values
+  }
+}
+
+export default connect(mapMatricesToProps)(MatrixBank);
