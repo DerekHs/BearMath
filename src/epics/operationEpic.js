@@ -28,7 +28,7 @@ export const operationEpic = (action$, state$) => action$.pipe(
 )
 
 function createBody(dataNames, state) {
-    let dataValues = dataNames.map(name => [state.get(name)[0], state.get(name)[1].toMap()])
+    let dataValues = dataNames.map(name => [state.get(name)[0], state.get(name)[1].serialize()])
     console.log(Object.assign(...dataNames.map((k, i) => ({ [k]: dataValues[i] }))))
     return Object.assign(...dataNames.map((k, i) => ({ [k]: dataValues[i] })))
 }

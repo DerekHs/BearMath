@@ -8,11 +8,10 @@ const END = "\\end{pmatrix}"
 
 class Matrix extends React.Component {
     convertStateToLatex(props) {
-        console.log(props)
         let fragments = new List()
-        var numericValues = props.ndarray.numericValues.map(float => Math.round(float * Math.pow(10, 4)) / Math.pow(10, 4))
+        var numericValues = props.numerics.numericValues.map(float => Math.round(float * Math.pow(10, 4)) / Math.pow(10, 4))
         var rows, cols
-        [rows, cols] = props.ndarray.shape
+        [rows, cols] = props.numerics.shape
         var count
         for (count = 0; count < rows; count++) {
             fragments = fragments

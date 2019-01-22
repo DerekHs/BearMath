@@ -12,7 +12,7 @@ export default class Ndarray {
         return this.shape[1]
     }
 
-    toMap() {
+    serialize() {
         return { numericValues: this.numericValues, shape: this.shape }
     }
 }

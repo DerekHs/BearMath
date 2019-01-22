@@ -4,9 +4,9 @@ import { connect } from "react-redux"
 import CreateMatrix from "components/createMatrix/CreateMatrix"
 import BankWrapper from "components/bank/BankWrapper"
 
-import RichMatrix from "components/bank/mathematicalObjects/RichMatrix"
-import Tuple from "components/bank/mathematicalObjects/Tuple"
-import Scalar from "components/bank/mathematicalObjects/Scalar"
+import RichMatrix from "components/bank/RichMatrix"
+import Tuple from "components/common/Tuple"
+import RichScalar from "components/bank/RichScalar"
 
 
 class MatrixBank extends Component {
@@ -26,7 +26,7 @@ class MatrixBank extends Component {
 const renderHelper = (name, type, numerics) => {
   switch (type) {
     case "SCALAR":
-      return (<Scalar name={name} numerics={numerics} />)
+      return (<RichScalar name={name} numerics={numerics} />)
     case "NDARRAY":
       return (<RichMatrix name={name} numerics={numerics} />)
     case "TUPLE":

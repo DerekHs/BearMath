@@ -9,7 +9,7 @@ class Tuple extends React.Component {
                     {this.props.numerics.nameMatrixPairs.map(([name, ndarray]) =>
                         <div className="column" key={name}>
                             <div className="box">
-                                <Matrix ndarray={ndarray} />
+                                <Matrix numerics={ndarray} />
                                 <div>{name}</div>
                             </div>
                         </div>

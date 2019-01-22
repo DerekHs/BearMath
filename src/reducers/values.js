@@ -3,12 +3,13 @@ import { OrderedMap } from "immutable"
 
 import Ndarray from "util/Ndarray"
 import Tuple from "util/Tuple"
+import Scalar from "util/Scalar"
 
 const ndarrayv = [new Ndarray([1, 1, 1, 0], [2, 2]), new Ndarray([1, 1, 1, 4], [2, 2]), new Ndarray([1, 1, 1, 4], [2, 2])]
 const namev = ["charmander", "bulbasaur", "squirtle"]
 
 const initialState = new OrderedMap({
-  exampleScalar: ["SCALAR", 5],
+  exampleScalar: ["SCALAR", new Scalar(5)],
   exampleNdarray: ["NDARRAY", new Ndarray([1, 2, 3, 4], [2, 2])],
   exampleTuple: ["TUPLE", new Tuple(namev, ndarrayv)]
 })
