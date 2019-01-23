@@ -14,24 +14,6 @@ class RichScalar extends React.Component {
             <div className="box has-text-centered">
                 <Scalar numerics={this.props.numerics} />
                 {this.props.name}
-                <br />
-                <span className="icon has-text-info" >
-                    <ModalWrapper>
-                        <ResponsiveIcon icon="fa-edit" title="Edit the matrix in place" />
-                        {`edit ${this.props.name}`}
-                        <div>hello</div>
-                    </ModalWrapper>
-                </span>
-                <span className="icon has-text-info" >
-                    <ModalWrapper>
-                        <ResponsiveIcon icon="fa-clone" title="Create a duplicate of this matrix" />
-                        {`clone ${this.props.matrixName}`}
-                        <div>hello</div>
-                    </ModalWrapper>
-                </span>
-                <span className="icon has-text-info" >
-                    <ResponsiveIcon icon="fa-trash-alt" onClick={() => this.props.deleteMatrix(this.props.name)} title="Delete this matrix" />
-                </span>
             </div>
         )
     }

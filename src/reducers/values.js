@@ -8,10 +8,14 @@ import Scalar from "util/Scalar"
 const ndarrayv = [new Ndarray([1, 1, 1, 0], [2, 2]), new Ndarray([1, 1, 1, 4], [2, 2]), new Ndarray([1, 1, 1, 4], [2, 2])]
 const namev = ["charmander", "bulbasaur", "squirtle"]
 
+// const initialState = new OrderedMap({
+//   exampleScalar: ["SCALAR", new Scalar(5)],
+//   exampleNdarray: ["NDARRAY", new Ndarray([1, 2, 3, 4], [2, 2])],
+//   exampleTuple: ["TUPLE", new Tuple(namev, ndarrayv)]
+// })
+
 const initialState = new OrderedMap({
-  exampleScalar: ["SCALAR", new Scalar(5)],
   exampleNdarray: ["NDARRAY", new Ndarray([1, 2, 3, 4], [2, 2])],
-  exampleTuple: ["TUPLE", new Tuple(namev, ndarrayv)]
 })
 
 const values = (state = initialState, action) => {
@@ -42,7 +46,7 @@ const values = (state = initialState, action) => {
             break
           }
           case "SCALAR": {
-            dataTypeObjectPair = ["SCALAR", action.result.result]
+            dataTypeObjectPair = ["SCALAR", new Scalar(action.result.result)]
             break
           }
           default:

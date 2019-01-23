@@ -1,5 +1,5 @@
 import React from 'react';
-import Matrix from "components/common/Matrix"
+import RichMatrix from "components/bank/RichMatrix"
 
 class Tuple extends React.Component {
     render() {
@@ -8,10 +8,7 @@ class Tuple extends React.Component {
                 <div className="columns is-multiline">
                     {this.props.numerics.nameMatrixPairs.map(([name, ndarray]) =>
                         <div className="column" key={name}>
-                            <div className="box">
-                                <Matrix numerics={ndarray} />
-                                <div>{name}</div>
-                            </div>
+                            <RichMatrix numerics={ndarray} name={name} />
                         </div>
                     )}
                 </div>

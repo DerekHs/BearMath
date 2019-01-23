@@ -5,7 +5,7 @@ import CreateMatrix from "components/createMatrix/CreateMatrix"
 import BankWrapper from "components/bank/BankWrapper"
 
 import RichMatrix from "components/bank/RichMatrix"
-import Tuple from "components/common/Tuple"
+import Tuple from "components/bank/Tuple"
 import RichScalar from "components/bank/RichScalar"
 
 

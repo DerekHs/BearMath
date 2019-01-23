@@ -37,3 +37,13 @@ export function qr(argv) {
     return `np.linalg.qr(${argv[0]})`
 }
 export const qrTypes = ["NDARRAY"]
+
+export function determinant(argv) {
+    return `np.linalg.det(${argv[0]})`
+}
+export const determinantTypes = ["NDARRAY"]
+
+export function nullspace(argv) {
+    return `sp.linalg.null_space(${argv[0]})`
+}
+export const nullspaceTypes = ["NDARRAY"]

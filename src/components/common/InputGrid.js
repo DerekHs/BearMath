@@ -5,6 +5,13 @@ import { connect } from "react-redux"
 import { upsertMatrix } from "actions/matrices"
 import { renameMatrix } from "actions/matrices"
 
+const variableNameRe = new RegExp("^[a-zA-Z]+[1-9a-zA-Z]*$")
+
+function matchExact(r, str) {
+    var match = str.match(r);
+    return match != null && str == match[0];
+}
+
 class InputGrid extends React.Component {
     constructor(props) {
         super(props)
@@ -50,6 +57,7 @@ class InputGrid extends React.Component {
         this.updateMatrixName = this.updateMatrixName.bind(this)
         this.getStartingValue = this.getStartingValue.bind(this)
         this.setFinishedPopulating = this.setFinishedPopulating.bind(this)
+        this.validMatrixName = this.validMatrixName.bind(this)
     }
 
     addRow() {
@@ -109,6 +117,10 @@ class InputGrid extends React.Component {
         this.finishedPopulating = status
     }
 
+    validMatrixName() {
+        return matchExact(variableNameRe, this.state.matrixName)
+    }
+
     render() {
         let ret = (
             <div className="columns">
@@ -119,7 +131,7 @@ class InputGrid extends React.Component {
                         value={this.state.matrixName}
                         placeholder="Matrix Name"
                         onChange={(e) => this.updateMatrixName(e.target.value)} />
-                    <p className="help is-danger">Matrix name must be a valid python variable name</p>
+                    {!this.validMatrixName() && <p className="help is-danger">Matrix name must be a valid Python variable name</p>}
                     <div className="columns is-mobile" style={{ paddingTop: "25px" }}>
                         <div className="column is-narrow">
                             {[...Array(this.state.numRows).keys()].map(i =>
@@ -148,7 +160,7 @@ class InputGrid extends React.Component {
                             <span className="button is-small" onClick={this.removeCol}>Remove Col</span>
                             <span className="button is-small" onClick={this.addCol}>Add Col</span>
                             <div style={{ paddingTop: "20px" }}>
-                                <button className="button" onClick={this.submit}>Submit</button>
+                                <button className="button" disabled={!this.validMatrixName()} onClick={this.submit}>Submit</button>
                             </div>
                         </div>
                     </div>
