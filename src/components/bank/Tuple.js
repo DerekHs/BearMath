@@ -8,7 +8,7 @@ class Tuple extends React.Component {
                 <div className="columns is-multiline">
                     {this.props.numerics.nameMatrixPairs.map(([name, ndarray]) =>
                         <div className="column" key={name}>
-                            <RichMatrix numerics={ndarray} name={name} />
+                            <RichMatrix numerics={ndarray} name={name} clone />
                         </div>
                     )}
                 </div>

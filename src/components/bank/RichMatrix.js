@@ -15,23 +15,23 @@ class RichMatrix extends React.Component {
                 <Matrix numerics={this.props.numerics} />
                 {this.props.name}
                 <br />
-                <span className="icon has-text-info" >
+                {this.props.edit && <span className="icon has-text-info" >
                     <ModalWrapper>
                         <ResponsiveIcon icon="fa-edit" title="Edit the matrix in place" />
                         {`edit ${this.props.name}`}
                         <InputGrid ndarray={this.props.numerics} matrixName={this.props.name} edit />
                     </ModalWrapper>
-                </span>
-                <span className="icon has-text-info" >
+                </span>}
+                {this.props.clone && <span className="icon has-text-info" >
                     <ModalWrapper>
                         <ResponsiveIcon icon="fa-clone" title="Create a duplicate of this matrix" />
                         {`clone ${this.props.matrixName}`}
                         <InputGrid ndarray={this.props.numerics} matrixName={this.props.name} clone />
                     </ModalWrapper>
-                </span>
-                <span className="icon has-text-info" >
+                </span>}
+                {this.props.delete && <span className="icon has-text-info" >
                     <ResponsiveIcon icon="fa-trash-alt" onClick={() => this.props.deleteMatrix(this.props.name)} title="Delete this matrix" />
-                </span>
+                </span>}
             </div>
         )
     }

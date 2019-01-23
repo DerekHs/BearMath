@@ -1,11 +1,13 @@
 
 import { combineReducers } from 'redux'
 import values from './values'
-import generatedCode from './generatedCode'
+import temp from './temp'
 import error from './error'
+import loading from './loading'
 
 export default combineReducers({
     values,
-    generatedCode,
+    temp,
+    loading,
     error
 })

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
+import { connect } from "react-redux"
+import { bindActionCreators } from 'redux'
 import { Dropdown } from "react-bulma-components/full"
+
+import { clearTemp } from "actions/temp"
 import GenericOperation from "components/controlPanel/operations/GenericOperation"
 import * as Creators from "components/controlPanel/CodeCreators"
 
@@ -14,10 +18,13 @@ class ControlPanel extends Component {
   }
 
   selectTab = selected => {
+    this.props.clearTemp()
     this.setState({ operationType: selected, operation: "" });
+
   };
 
   operationSelected = selected => {
+    this.props.clearTemp()
     this.setState({ operation: selected })
   }
 
@@ -39,9 +46,9 @@ class ControlPanel extends Component {
             <li className={this.isActive("Decompositions")}>
               <a onClick={() => this.selectTab("Decompositions")}>Decompositions</a>
             </li>
-            <li className={this.isActive("Misc")}>
+            {/* <li className={this.isActive("Misc")}>
               <a onClick={() => this.selectTab("Misc")}>Misc.</a>
-            </li>
+            </li> */}
           </ul>
         </div>
         {this.state.operationType === "Arithmetic" && <div className="box">
@@ -87,4 +94,11 @@ class ControlPanel extends Component {
   }
 }
 
-export default ControlPanel
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    clearTemp
+  },
+    dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(ControlPanel)

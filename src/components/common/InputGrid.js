@@ -5,11 +5,11 @@ import { connect } from "react-redux"
 import { upsertMatrix } from "actions/matrices"
 import { renameMatrix } from "actions/matrices"
 
-const variableNameRe = new RegExp("^[a-zA-Z]+[1-9a-zA-Z]*$")
+const variableNameRe = new RegExp("^[a-zA-Z]+[1-9a-zA-Z_]*$")
 
 function matchExact(r, str) {
     var match = str.match(r);
-    return match != null && str == match[0];
+    return match != null && str === match[0];
 }
 
 class InputGrid extends React.Component {
@@ -36,15 +36,11 @@ class InputGrid extends React.Component {
         }
 
         else if (props.clone) {
-            var today = new Date();
-            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-            var timestamp = date + ' ' + time
             this.state = {
                 numRows: props.ndarray.rows(),
                 numCols: props.ndarray.cols(),
                 numericValues: props.ndarray.numericValues,
-                matrixName: props.matrixName + ' __CLONED_AT__' + timestamp
+                matrixName: props.matrixName + "_CLONE"
             }
             this.finishedPopulating = false
         }
@@ -110,7 +106,7 @@ class InputGrid extends React.Component {
         if (!this.finishedPopulating) {
             return this.state.numericValues[i * this.state.numCols + j]
         }
-        return 0
+        return null
     }
 
     setFinishedPopulating(status) {

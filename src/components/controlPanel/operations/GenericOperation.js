@@ -4,15 +4,30 @@ import { bindActionCreators } from 'redux'
 
 import { operationBegin } from "actions/operation"
 import { Button } from "react-bulma-components/full"
+import ReactLoading from "react-loading";
+
+import Scalar from "components/common/Scalar"
+import Matrix from "components/common/Matrix"
+import Tuple from "components/bank/Tuple"
+
+const variableNameRe = new RegExp("^[a-zA-Z]+[1-9a-zA-Z_]*$")
 
 const placeholder = "--Select Matrix--"
+
+function matchExact(r, str) {
+    var match = str.match(r);
+    return match != null && str === match[0];
+}
+
 class GenericOperation extends React.Component {
     constructor(props) {
         super(props)
         this.operate = this.operate.bind(this)
         this.showWarning = this.showWarning.bind(this)
         this.closeWarning = this.closeWarning.bind(this)
-        this.state = { matrix_1: "", matrix_2: "", resultVariable: "", displayWarning: false }
+        this.validMatrixName = this.validMatrixName.bind(this)
+        this.setResult = this.setResult.bind(this)
+        this.state = { resultVariable: "", displayWarning: false }
     }
     operate = () => {
         console.log(this.props)
@@ -21,8 +36,8 @@ class GenericOperation extends React.Component {
             this.props.codeCreator(argv),
             argv,
             this.props.dataTypes,
-            this["resultName"].value,
-            this.props.misc
+            this.state.resultVariable,
+            { ...this.props.misc, save: this.state.resultVariable }
         )
         this.showWarning()
     }
@@ -33,6 +48,17 @@ class GenericOperation extends React.Component {
 
     closeWarning = () => {
         this.setState({ displayWarning: false })
+    }
+
+    validMatrixName() {
+        if (this.state.resultVariable === "") {
+            return true
+        }
+        return matchExact(variableNameRe, this.state.resultVariable)
+    }
+
+    setResult(resultVariable) {
+        this.setState({ resultVariable: resultVariable })
     }
 
     render() {
@@ -56,12 +82,16 @@ class GenericOperation extends React.Component {
 
                     <div className="level-right">
                         <div className="level-item">
-                            <input
-                                className="input"
-                                type="text"
-                                placeholder="Store Result As"
-                                ref={element => { this["resultName"] = element }}
-                            />
+                            <div>
+                                <input
+                                    className="input"
+                                    type="text"
+                                    placeholder="Save Result As"
+                                    value={this.state.resultVariable}
+                                    onChange={e => this.setResult(e.target.value)}
+                                />
+                                {!this.validMatrixName() && <p className="help is-danger">Result name must be a valid Python variable name</p>}
+                            </div>
                         </div>
                     </div>
 
@@ -73,6 +103,7 @@ class GenericOperation extends React.Component {
                             <button className="delete" onClick={this.closeWarning}></button>
                             <p><b>Numpy Error: </b>{this.props.mostRecentError}</p>
                         </div>}
+                        {helperWrapper(this.props.temp)}
                     </div>
                     <div className="level-right">
                         <div className="level-item">
@@ -85,10 +116,37 @@ class GenericOperation extends React.Component {
     }
 }
 
+const helperWrapper = (temp) => {
+    if (temp) {
+        return (
+            <div className="column has-text-centered">
+                <h2 className="subtitle is-3">Result:</h2>
+                {temp && renderHelper(temp)}
+            </div>
+        )
+    }
+    return null
+}
+
+const renderHelper = ([name, [type, numerics]]) => {
+    switch (type) {
+        case "SCALAR":
+            return (<Scalar name={name} numerics={numerics} />)
+        case "NDARRAY":
+            return (<Matrix name={name} numerics={numerics} edit clone delete />)
+        case "TUPLE":
+            return (<Tuple name={name} numerics={numerics} />)
+        default:
+            return null
+    }
+}
+
 function mapStateToProps(state) {
     return {
         workspaceValues: state.values,
-        mostRecentError: state.error
+        temp: state.temp,
+        mostRecentError: state.error,
+        loading: state.loading
     }
 }
 

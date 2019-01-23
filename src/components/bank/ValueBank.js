@@ -13,9 +13,9 @@ class MatrixBank extends Component {
   render() {
     return (
       <BankWrapper title="Workspace" createNew={<CreateMatrix />}>
-        {this.props.matrixMap.entrySeq().map(([k, v]) =>
+        {this.props.workspaceValues.entrySeq().map(([k, v]) =>
           <div className="column is-narrow is-mobile" key={k}>
-            {renderHelper(k, ...v)}
+            {renderHelper(k, v)}
           </div>
         )}
       </BankWrapper>
@@ -23,12 +23,12 @@ class MatrixBank extends Component {
   }
 }
 
-const renderHelper = (name, type, numerics) => {
+const renderHelper = (name, [type, numerics]) => {
   switch (type) {
     case "SCALAR":
       return (<RichScalar name={name} numerics={numerics} />)
     case "NDARRAY":
-      return (<RichMatrix name={name} numerics={numerics} />)
+      return (<RichMatrix name={name} numerics={numerics} edit clone delete />)
     case "TUPLE":
       return (<Tuple name={name} numerics={numerics} />)
     default:
@@ -38,7 +38,7 @@ const renderHelper = (name, type, numerics) => {
 
 function mapMatricesToProps(state) {
   return {
-    matrixMap: state.values
+    workspaceValues: state.values
   }
 }
 

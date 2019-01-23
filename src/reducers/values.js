@@ -34,7 +34,7 @@ const values = (state = initialState, action) => {
     case DELETE_MATRIX:
       return state.remove(action.name)
     case OPERATION_SUCCESS:
-      if (action.result.validOperation) {
+      if (action.result.validOperation && action.misc.save) {
         switch (action.result.dataType) {
           case "NDARRAY": {
             dataTypeObjectPair = ["NDARRAY", new Ndarray(action.result.result.numericValues, action.result.result.shape)]
