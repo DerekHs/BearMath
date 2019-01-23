@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 
 import { operationBegin } from "actions/operation"
 import { Button } from "react-bulma-components/full"
-import ReactLoading from "react-loading";
+import { GridLoader } from 'react-spinners';
 
 import Scalar from "components/common/Scalar"
 import Matrix from "components/common/Matrix"
@@ -104,6 +104,7 @@ class GenericOperation extends React.Component {
                             <p><b>Numpy Error: </b>{this.props.mostRecentError}</p>
                         </div>}
                         {helperWrapper(this.props.temp)}
+                        {this.props.loading && <GridLoader color="#00bfff" />}
                     </div>
                     <div className="level-right">
                         <div className="level-item">

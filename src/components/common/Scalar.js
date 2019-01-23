@@ -4,7 +4,7 @@ class Scalar extends React.Component {
     render() {
         return (
             <div>
-                <b>{Math.round(this.props.numerics.value * Math.pow(10, 4)) / Math.pow(10, 4)}</b>
+                <h2>{Math.round(this.props.numerics.value * Math.pow(10, 4)) / Math.pow(10, 4)}</h2>
             </div>
         )
     }
