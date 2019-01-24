@@ -15,7 +15,7 @@ const namev = ["charmander", "bulbasaur", "squirtle"]
 // })
 
 const initialState = new OrderedMap({
-  exampleNdarray: ["NDARRAY", new Ndarray([1, 2, 3, 4], [2, 2])],
+  exampleNdarray: ["NDARRAY", new Ndarray([1, 2, 3, 4, 5, 6, 7, 8, 9], [3, 3])],
 })
 
 const values = (state = initialState, action) => {

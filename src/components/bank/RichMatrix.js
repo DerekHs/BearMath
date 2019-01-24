@@ -25,7 +25,7 @@ class RichMatrix extends React.Component {
                 {this.props.clone && <span className="icon has-text-info" >
                     <ModalWrapper>
                         <ResponsiveIcon icon="fa-clone" title="Create a duplicate of this matrix" />
-                        {`clone ${this.props.matrixName}`}
+                        {`clone ${this.props.name}`}
                         <InputGrid ndarray={this.props.numerics} matrixName={this.props.name} clone />
                     </ModalWrapper>
                 </span>}

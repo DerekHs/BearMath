@@ -30,7 +30,7 @@ const renderHelper = (name, [type, numerics]) => {
     case "NDARRAY":
       return (<RichMatrix name={name} numerics={numerics} edit clone delete />)
     case "TUPLE":
-      return (<Tuple name={name} numerics={numerics} />)
+      return (<Tuple name={name} numerics={numerics} clone={true} delete />)
     default:
       return null
   }

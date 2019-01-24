@@ -90,7 +90,7 @@ class InputGrid extends React.Component {
         let numericValues = []
         for (let r = 0; r < this.state.numRows; r++) {
             for (let c = 0; c < this.state.numCols; c++) {
-                numericValues.push(this[`textInput${r},${c}`].value)
+                numericValues.push(parseFloat(this[`textInput${r},${c}`].value) || 0)
             }
         }
         if (this.props.edit) {
@@ -114,6 +114,9 @@ class InputGrid extends React.Component {
     }
 
     validMatrixName() {
+        if (this.state.matrixName === "") {
+            return true
+        }
         return matchExact(variableNameRe, this.state.matrixName)
     }
 
@@ -121,13 +124,15 @@ class InputGrid extends React.Component {
         let ret = (
             <div className="columns">
                 <div className="column">
-                    <input
-                        className="input"
-                        type="text"
-                        value={this.state.matrixName}
-                        placeholder="Matrix Name"
-                        onChange={(e) => this.updateMatrixName(e.target.value)} />
-                    {!this.validMatrixName() && <p className="help is-danger">Matrix name must be a valid Python variable name</p>}
+                    <div className="field">
+                        <input
+                            className="input"
+                            type="text"
+                            value={this.state.matrixName}
+                            placeholder="Matrix Name"
+                            onChange={(e) => this.updateMatrixName(e.target.value)} />
+                        {!this.validMatrixName() && <p className="help is-danger">Matrix name must be a valid Python variable name</p>}
+                    </div>
                     <div className="columns is-mobile" style={{ paddingTop: "25px" }}>
                         <div className="column is-narrow">
                             {[...Array(this.state.numRows).keys()].map(i =>
@@ -156,7 +161,7 @@ class InputGrid extends React.Component {
                             <span className="button is-small" onClick={this.removeCol}>Remove Col</span>
                             <span className="button is-small" onClick={this.addCol}>Add Col</span>
                             <div style={{ paddingTop: "20px" }}>
-                                <button className="button" disabled={!this.validMatrixName()} onClick={this.submit}>Submit</button>
+                                <button className="button" disabled={this.state.matrixName === "" || !this.validMatrixName()} onClick={this.submit}>Submit</button>
                             </div>
                         </div>
                     </div>
