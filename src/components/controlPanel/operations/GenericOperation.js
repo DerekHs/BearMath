@@ -71,7 +71,7 @@ class GenericOperation extends React.Component {
                                 <div className="select">
                                     <select defaultValue="" ref={element => { this[`dropdown${i}`] = element }}>
                                         <option value="" disabled>{placeholder}</option>
-                                        {this.props.workspaceValues.keySeq().map(k =>
+                                        {this.props.workspaceMatrices.keySeq().map(k =>
                                             <option value={k} key={k}>{k}</option>
                                         )}
                                     </select>
@@ -144,7 +144,7 @@ const renderHelper = ([name, [type, numerics]]) => {
 
 function mapStateToProps(state) {
     return {
-        workspaceValues: state.values,
+        workspaceMatrices: state.values.filter(v => v[0] === "NDARRAY"),
         temp: state.temp,
         mostRecentError: state.error,
         loading: state.loading
