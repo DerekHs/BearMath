@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 
 import { operationBegin } from "actions/operation"
 import { Button } from "react-bulma-components/full"
+import { List } from "immutable"
 import { GridLoader } from 'react-spinners';
 
 import Scalar from "components/common/Scalar"
@@ -27,11 +28,15 @@ class GenericOperation extends React.Component {
         this.closeWarning = this.closeWarning.bind(this)
         this.validMatrixName = this.validMatrixName.bind(this)
         this.setResult = this.setResult.bind(this)
-        this.state = { resultVariable: "", displayWarning: false }
+        this.setDropdownValue = this.setDropdownValue.bind(this)
+        this.state = {
+            resultVariable: "",
+            displayWarning: false,
+            dropdownValues: List(Array(props.numDropdowns).fill().map(() => placeholder))
+        }
     }
     operate = () => {
-        console.log(this.props)
-        let argv = [...Array(this.props.numDropdowns).keys()].map(i => this[`dropdown${i}`].value)
+        let argv = this.state.dropdownValues.toJS()
         this.props.operationBegin(
             this.props.codeCreator(argv),
             argv,
@@ -61,23 +66,35 @@ class GenericOperation extends React.Component {
         this.setState({ resultVariable: resultVariable })
     }
 
+    setDropdownValue(event, i) {
+        let val = event.target.value
+        this.setState(state => ({ dropdownValues: state.dropdownValues.set(i, val) }))
+    }
+
     render() {
         return (
             <div className="box">
                 <div className="level">
                     <div className="level-left">
-                        {[...Array(this.props.numDropdowns).keys()].map(i =>
-                            <div className="level-item" key={i}>
-                                <div className="select">
-                                    <select defaultValue="" ref={element => { this[`dropdown${i}`] = element }}>
-                                        <option value="" disabled>{placeholder}</option>
-                                        {this.props.workspaceMatrices.keySeq().map(k =>
-                                            <option value={k} key={k}>{k}</option>
-                                        )}
-                                    </select>
-                                </div>
+                        <div className="level-item">
+                            <div className="columns">
+                                {[...Array(this.props.numDropdowns).keys()].map(i =>
+                                    <div className="column has-text-centered">
+                                        <div className="select">
+                                            <select value={this.state.dropdownValues.get(i)} onChange={event => this.setDropdownValue(event, i)}>
+                                                <option value={placeholder} disabled>{placeholder}</option>
+                                                {this.props.workspaceMatrices.keySeq().map(k =>
+                                                    <option value={k} key={k}>{k}</option>
+                                                )}
+                                            </select>
+                                        </div>
+                                        <br />
+                                        <br />
+                                        {this.state.dropdownValues.get(i) !== placeholder && renderHelper([this.state.dropdownValues.get(i), this.props.workspaceMatrices.get(this.state.dropdownValues.get(i))])}
+                                    </div>
+                                )}
                             </div>
-                        )}
+                        </div>
                     </div>
 
                     <div className="level-right">
