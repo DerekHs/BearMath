@@ -47,3 +47,8 @@ export function nullspace(argv) {
     return `sp.linalg.null_space(${argv[0]})`
 }
 export const nullspaceTypes = ["NDARRAY"]
+
+export function leastSquares(argv) {
+    return `np.linalg.lstsq(${argv[0]}, ${argv[1]})`
+}
+export const leastSquaresTypes = ["NDARRAY", "NDARRAY"]
