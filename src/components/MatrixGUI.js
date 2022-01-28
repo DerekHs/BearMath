@@ -8,8 +8,9 @@ class MatrixGUI extends Component {
   render() {
     return (
       <div className="container">
+        <br/>
         <section>
-          <h1 className="title is-3">Bear Math</h1>
+          <h1 className="title is-3">BearMath</h1>
         </section>
         <br />
         <section>

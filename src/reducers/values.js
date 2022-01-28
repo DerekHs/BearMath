@@ -6,17 +6,17 @@ import Tuple from "util/Tuple"
 import Scalar from "util/Scalar"
 
 const ndarrayv = [new Ndarray([1, 1, 1, 0], [2, 2]), new Ndarray([1, 1, 1, 4], [2, 2]), new Ndarray([1, 1, 1, 4], [2, 2])]
-const namev = ["charmander", "bulbasaur", "squirtle"]
-
-// const initialState = new OrderedMap({
-//   exampleScalar: ["SCALAR", new Scalar(5)],
-//   exampleNdarray: ["NDARRAY", new Ndarray([1, 2, 3, 4], [2, 2])],
-//   exampleTuple: ["TUPLE", new Tuple(namev, ndarrayv)]
-// })
+const namev = ["U", "Σ", "V"]
 
 const initialState = new OrderedMap({
-  exampleNdarray: ["NDARRAY", new Ndarray([1, 2, 3, 4, 5, 6, 7, 8, 9], [3, 3])],
+  exampleScalar: ["SCALAR", new Scalar(5)],
+  exampleNDArray: ["NDARRAY", new Ndarray([1, 2, 3, 4], [2, 2])],
+  exampleNDArrayTuple: ["TUPLE", new Tuple(namev, ndarrayv)]
 })
+
+// const initialState = new OrderedMap({
+//   exampleNdarray: ["NDARRAY", new Ndarray([1, 2, 3, 4, 5, 6, 7, 8, 9], [3, 3])],
+// })
 
 const values = (state = initialState, action) => {
   var dataTypeObjectPair
